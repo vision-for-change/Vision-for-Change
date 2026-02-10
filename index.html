@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vision for Change</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    * { margin:0; padding:0; box-sizing:border-box; scroll-behavior:smooth; }
+    body { font-family:'Montserrat', sans-serif; color:#333; background:#fff; }
+    a { text-decoration:none; color:inherit; }
+    img { max-width:100%; display:block; }
+    button { cursor:pointer; border:none; border-radius:6px; transition:0.3s; }
+
+    /* Navbar */
+    nav { position:fixed; width:100%; top:0; left:0; background:#fff; display:flex; justify-content:space-between; align-items:center; padding:20px 60px; box-shadow:0 2px 10px rgba(0,0,0,0.1); z-index:1000; }
+    nav .logo { font-weight:700; font-size:1.6rem; color:#28a745; }
+    nav ul { list-style:none; display:flex; gap:35px; }
+    nav ul li a { font-weight:600; color:#333; }
+    nav ul li a:hover { color:#28a745; }
+
+    /* Hero Section */
+    .hero { height:100vh; background:url('file:///C:/Users/niman/OneDrive/Desktop/vision-for-change/624467619_943790804979656_4611263221902637903_n.jpg') center/cover no-repeat; display:flex; align-items:center; justify-content:center; position:relative; text-align:center; color:#fff; }
+    .hero::after { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,128,0,0.6); }
+    .hero-content { position:relative; max-width:900px; z-index:1; }
+    .hero h1 { font-size:3rem; margin-bottom:15px; }
+    .hero h3 { font-size:1.5rem; margin-bottom:20px; font-weight:500; }
+    .hero p { font-size:1.1rem; line-height:1.7; }
+
+    /* Stats Section */
+    .stats { display:flex; flex-wrap:wrap; justify-content:center; gap:30px; padding:80px 60px; background:#f9f9f9; text-align:center; }
+    .stat-card { background:#fff; flex:1 1 260px; padding:35px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1); transition:0.3s; }
+    .stat-card:hover { transform:translateY(-10px); box-shadow:0 8px 25px rgba(0,0,0,0.15); }
+    .stat-card h2 { font-size:2rem; color:#28a745; margin-bottom:12px; }
+    .stat-card p { font-size:1rem; color:#555; }
+
+    /* About Section */
+    .about { display:flex; flex-wrap:wrap; align-items:center; padding:80px 60px; gap:50px; }
+    .about-text { flex:1 1 450px; }
+    .about-text h2 { font-size:2.5rem; margin-bottom:20px; color:#28a745; }
+    .about-text p, .about-text ul { font-size:1.1rem; margin-bottom:12px; color:#555; }
+    .about-text ul { list-style:disc; padding-left:20px; }
+    .about-images { flex:1 1 400px; display:flex; flex-direction:column; gap:20px; }
+    .about-images img { border-radius:10px; box-shadow:0 5px 20px rgba(0,0,0,0.1); }
+
+    /* Donate Section */
+    .donate { background:#28a745; color:#fff; text-align:center; padding:80px 60px; }
+    .donate h2 { font-size:2.5rem; margin-bottom:20px; }
+    .donate p { font-size:1.2rem; margin-bottom:30px; }
+    .donate button { background:#fff; color:#28a745; padding:15px 35px; font-weight:600; font-size:1.1rem; }
+    .donate button:hover { background:#218838; color:#fff; }
+
+    /* Resources Section */
+    .resources { padding:80px 60px; background:#f9f9f9; }
+    .resources h2 { text-align:center; font-size:2.5rem; margin-bottom:50px; color:#28a745; }
+    .resources-grid { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; }
+    .resource-card { flex:1 1 260px; background:#fff; padding:30px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1); transition:0.3s; text-align:center; }
+    .resource-card:hover { transform:translateY(-10px); box-shadow:0 8px 25px rgba(0,0,0,0.15); }
+    .resource-card img { width:60px; margin-bottom:20px; }
+    .resource-card h3 { font-size:1.2rem; color:#28a745; margin-bottom:10px; }
+    .resource-card p { font-size:1rem; color:#555; }
+
+    /* Contact Section */
+    .contact { padding:80px 60px; text-align:center; }
+    .contact h2 { font-size:2.5rem; margin-bottom:25px; color:#28a745; }
+    .contact p { font-size:1.1rem; margin-bottom:15px; color:#555; }
+    .contact a.button { display:inline-block; margin:10px; background:#28a745; color:#fff; padding:12px 25px; border-radius:5px; font-weight:600; transition:0.3s; }
+    .contact a.button:hover { background:#218838; }
+
+    /* Footer */
+    footer { background:#333; color:#fff; text-align:center; padding:30px 60px; margin-top:50px; }
+    footer a { color:#28a745; }
+
+    /* Responsive */
+    @media(max-width:900px){
+      .about { flex-direction:column; }
+      .stats { flex-direction:column; }
+      .resources-grid { flex-direction:column; }
+      nav { flex-direction:column; gap:15px; padding:20px 30px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav>
+    <div class="logo">Vision for Change</div>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">Our Aim</a></li>
+      <li><a href="#donate">Donate</a></li>
+      <li><a href="#resources">Resources</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- Home Section -->
+  <section class="hero" id="home">
+    <div class="hero-content">
+      <h1>👁️ Vision for Change</h1>
+      <h3>Eyes matter. Access matters.</h3>
+      <p>We are a youth-led initiative committed to making eye care accessible and affordable for everyone. Vision is a vital part of daily life, yet millions of people worldwide struggle to get the care they need.
+      Our goal is to raise awareness about eye health, highlight the costs that prevent people from seeking care, and inspire our community to take action. Together, we can ensure that everyone has the opportunity to see clearly.</p>
+    </div>
+  </section>
+
+  <!-- Stats Section -->
+  <section class="stats">
+    <div class="stat-card">
+      <h2>1B+</h2>
+      <p>People globally need vision correction but lack access.</p>
+    </div>
+    <div class="stat-card">
+      <h2>80%</h2>
+      <p>Of vision problems are preventable or treatable with proper care.</p>
+    </div>
+    <div class="stat-card">
+      <h2>Impact</h2>
+      <p>Uncorrected vision problems affect education, work, and quality of life.</p>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about" id="about">
+    <div class="about-text">
+      <h2>Our Mission & Vision</h2>
+      <p>Vision for Change is founded and run by youth who are passionate about eye health. We believe that everyone deserves access to affordable eye care, and education is the first step.</p>
+      <p><strong>Our Mission:</strong></p>
+      <ul>
+        <li>Educate communities about the importance of eye health and prevention of vision problems.</li>
+        <li>Reduce barriers to eye care by spreading awareness about costs and resources.</li>
+        <li>Inspire action through campaigns, advocacy, and fundraising for affordable vision solutions.</li>
+      </ul>
+      <p>We envision a world where clear vision is a right, not a privilege, and we are taking the first steps to make that a reality in our communities.</p>
+    </div>
+    <div class="about-images">
+      <img src="https://rendia.com/wp-content/uploads/2017/10/VisionProblemsLearning_10.13.17.png" alt="Vision Problems">
+      <img src="https://cdn.prod.website-files.com/62c48993e01c97eb9f854895/63a4733fcbe18f4723ddbac9_shutterstock_581362633.jpg" alt="Eye Health">
+    </div>
+  </section>
+
+  <!-- Donate Section -->
+  <section class="donate" id="donate">
+    <h2>Join Our Movement</h2>
+    <p>Even though we’re just getting started, you can help make a real difference:</p>
+    <p>Donate: Your contributions will go toward raising awareness, supporting educational campaigns, and eventually funding low-cost eye exams and glasses.</p>
+    <p>Spread the Word: Share our resources and posts to help more people understand the importance of eye health.</p>
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTK_PN2sIn9YGsXqR97BFPVaWW6oPix-yyXlw8b3ifZ2gABw/viewform?usp=dialog" target="_blank"><button>Donate Now</button></a>
+  </section>
+
+  <!-- Resources Section -->
+  <section class="resources" id="resources">
+    <h2>Protect Your Vision</h2>
+    <div class="resources-grid">
+      <div class="resource-card"
+        <h3>Screen Breaks</h3>
+        <p>Follow the 20-20-20 rule—every 20 minutes, look at something 20 feet away for 20 seconds.</p>
+      </div>
+      <div class="resource-card">
+        <h3>Nutrition</h3>
+        <p>Eat foods rich in vitamins A, C, and E to support eye health.</p>
+      </div>
+      <div class="resource-card">
+        <h3>Regular Checkups</h3>
+        <p>Eye exams can detect issues early and prevent long-term problems.</p>
+      </div>
+      <div class="resource-card">
+        <h3>Sun Protection</h3>
+        <p>Wear sunglasses with UV protection to protect your eyes from harmful rays.</p>
+      </div>
+    </div>
+    <p style="text-align:center; margin-top:20px;"><a href="https://www.who.int/health-topics/blindness-and-vision-loss#tab=tab_1" target="_blank" style="color:#28a745;">Learn more from trusted sources</a></p>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <h2>We Want to Hear From You</h2>
+    <p>Whether you want to donate, volunteer, or simply learn more, we’d love to connect:</p>
+    <a href="mailto:visionforchange18@gmail.com" class="button">visionforchange18@gmail.com</a>
+    <a href="https://www.instagram.com/visionforchange2026/" target="_blank" class="button">@visionforchange2026</a>
+    <a href="tel:+16132828851" class="button">+1 613 282 8851</a>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Vision for Change. All Rights Reserved.</p>
+  </footer>
+
+</body>
+</html>
