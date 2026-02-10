@@ -55,11 +55,11 @@
     .resources { padding:80px 60px; background:#f9f9f9; }
     .resources h2 { text-align:center; font-size:2.5rem; margin-bottom:50px; color:#28a745; }
     .resources-grid { display:flex; flex-wrap:wrap; gap:30px; justify-content:center; }
-    .resource-card { flex:1 1 260px; background:#fff; padding:30px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1); transition:0.3s; text-align:center; }
+    .resource-card { flex:1 1 260px; background:#fff; padding:30px; border-radius:12px; box-shadow:0 5px 20px rgba(0,0,0,0.1); transition:0.3s; text-align:center; display:flex; flex-direction:column; justify-content:center; min-height:180px; }
     .resource-card:hover { transform:translateY(-10px); box-shadow:0 8px 25px rgba(0,0,0,0.15); }
     .resource-card img { width:60px; margin-bottom:20px; }
     .resource-card h3 { font-size:1.2rem; color:#28a745; margin-bottom:10px; }
-    .resource-card p { font-size:1rem; color:#555; }
+    .resource-card p { font-size:1rem; color:#555; line-height:1.5; word-wrap:break-word; }
 
     /* Contact Section */
     .contact { padding:80px 60px; text-align:center; }
@@ -150,29 +150,30 @@
   </section>
 
   <!-- Resources Section -->
- <section class="resources" id="resources">
+  <section class="resources" id="resources">
     <h2>Protect Your Vision</h2>
-    <div class="resources-grid">
-      <div class="resource-card">
+    <div class="resources-grid" id="resources-grid">
+      <div class="resource-card" data-text="Follow the 20-20-20 rule—every 20 minutes, look at something 20 feet away for 20 seconds.">
         <h3>Screen Breaks</h3>
-        <p>Follow the 20-20-20 rule—every 20 minutes, look at something 20 feet away for 20 seconds.</p>
+        <p></p>
       </div>
-      <div class="resource-card">
+      <div class="resource-card" data-text="Eat foods rich in vitamins A, C, and E to support eye health.">
         <h3>Nutrition</h3>
-        <p>Eat foods rich in vitamins A, C, and E to support eye health.</p>
+        <p></p>
       </div>
-      <div class="resource-card">
+      <div class="resource-card" data-text="Eye exams can detect issues early and prevent long-term problems.">
         <h3>Regular Checkups</h3>
-        <p>Eye exams can detect issues early and prevent long-term problems.</p>
+        <p></p>
       </div>
-      <div class="resource-card">
+      <div class="resource-card" data-text="Wear sunglasses with UV protection to protect your eyes from harmful rays.">
         <h3>Sun Protection</h3>
-        <p>Wear sunglasses with UV protection to protect your eyes from harmful rays.</p>
+        <p></p>
       </div>
     </div>
-    <p style="text-align:center; margin-top:20px;"><a href="https://www.who.int/health-topics/blindness-and-vision-loss#tab=tab_1" target="_blank" style="color:#28a745;">Learn more from trusted sources</a></p>
-</section>
-
+    <p style="text-align:center; margin-top:20px;">
+      <a href="https://www.who.int/health-topics/blindness-and-vision-loss#tab=tab_1" target="_blank" style="color:#28a745;">Learn more from trusted sources</a>
+    </p>
+  </section>
 
   <!-- Contact Section -->
   <section class="contact" id="contact">
@@ -187,6 +188,36 @@
   <footer>
     <p>&copy; 2026 Vision for Change. All Rights Reserved.</p>
   </footer>
+
+  <!-- JS for Screen Breaks Fix -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const cards = document.querySelectorAll('.resource-card');
+      cards.forEach(card => {
+        const p = card.querySelector('p');
+        const text = card.dataset.text;
+
+        // Split long text into smaller chunks if it exceeds 100 chars
+        if (text.length > 100) {
+          const words = text.split(' ');
+          let line = '';
+          const lines = [];
+          words.forEach(word => {
+            if ((line + word).length < 60) { // max 60 chars per line
+              line += word + ' ';
+            } else {
+              lines.push(line.trim());
+              line = word + ' ';
+            }
+          });
+          lines.push(line.trim());
+          p.innerHTML = lines.join('<br>');
+        } else {
+          p.textContent = text;
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
