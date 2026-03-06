@@ -5,920 +5,944 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Vision for Change — Clear Eyes. Brighter Futures.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@400;500;600;700&family=Editorial+New:ital,wght@0,400;1,400&family=Satoshi:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;1,9..144,300;1,9..144,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
+
+/* ─────────────────────────────────────
+   DESIGN TOKENS
+───────────────────────────────────── */
 :root {
-  --bg:        #050608;
-  --bg2:       #0A0C12;
-  --surface:   #0F1118;
-  --surface2:  #141720;
-  --border:    rgba(255,255,255,0.06);
-  --border2:   rgba(255,255,255,0.1);
-  --white:     #FFFFFF;
-  --off:       rgba(255,255,255,0.55);
-  --dim:       rgba(255,255,255,0.25);
-  --mute:      rgba(255,255,255,0.08);
-  --cyan:      #00E5CC;
-  --cyan2:     #00B5A0;
-  --blue:      #3D6FFF;
-  --blue2:     #2952D9;
-  --gold:      #F0B429;
-  --red-soft:  #FF6B6B;
-  --grad:      linear-gradient(135deg, var(--cyan), var(--blue));
-  --grad2:     linear-gradient(135deg, #00E5CC 0%, #3D6FFF 50%, #9B5DE5 100%);
+  --white:    #FFFFFF;
+  --paper:    #F7F5F0;
+  --paper2:   #EEE9DF;
+  --ink:      #1A1A2E;
+  --ink2:     #2D2D44;
+  --ink3:     #4A4A6A;
+  --muted:    #8A8AA8;
+  --border:   rgba(26,26,46,0.08);
+  --border2:  rgba(26,26,46,0.14);
+
+  /* Brand colours — sky teal & warm coral accent */
+  --teal:     #0EA5B0;
+  --teal2:    #0BC4D0;
+  --teal-lt:  #E0F7F9;
+  --teal-mid: #B2EEF2;
+  --coral:    #FF6B4A;
+  --coral-lt: #FFF0EC;
+  --sky:      #4A9EFF;
+  --sky-lt:   #EBF4FF;
+  --amber:    #F5A623;
+  --amber-lt: #FFF8EC;
+
+  --grad:     linear-gradient(135deg, #0EA5B0 0%, #4A9EFF 100%);
+  --grad2:    linear-gradient(135deg, #0EA5B0 0%, #0BC4D0 50%, #4A9EFF 100%);
 }
 
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
-html { font-size:16px; }
+html { font-size:16px; scroll-behavior:smooth; }
 
 body {
-  font-family:'Outfit',sans-serif;
-  background:var(--bg);
-  color:var(--white);
+  font-family:'DM Sans', sans-serif;
+  background:var(--white);
+  color:var(--ink);
   overflow-x:hidden;
   cursor:none;
 }
 
 ::-webkit-scrollbar { width:3px; }
-::-webkit-scrollbar-track { background:var(--bg); }
-::-webkit-scrollbar-thumb { background:var(--cyan); border-radius:2px; }
+::-webkit-scrollbar-track { background:var(--paper); }
+::-webkit-scrollbar-thumb { background:var(--teal); border-radius:2px; }
 
-/* ═══════════════════════════════════
+/* ─────────────────────────────────────
    CURSOR
-═══════════════════════════════════ */
+───────────────────────────────────── */
 #c-dot {
-  position:fixed; width:6px; height:6px;
-  background:var(--cyan); border-radius:50%;
-  pointer-events:none; z-index:10000;
-  transform:translate(-50%,-50%);
-  transition:width .2s, height .2s, background .2s;
-  mix-blend-mode:difference;
-}
-#c-ring {
-  position:fixed; width:40px; height:40px;
-  border:1px solid rgba(0,229,204,0.5);
-  border-radius:50%;
+  position:fixed; width:7px; height:7px;
+  background:var(--teal); border-radius:50%;
   pointer-events:none; z-index:9999;
   transform:translate(-50%,-50%);
-  transition:width .35s cubic-bezier(.25,.46,.45,.94),
-             height .35s cubic-bezier(.25,.46,.45,.94),
-             border-color .25s;
+  transition:width .22s, height .22s, background .22s;
 }
-body.cursor-hover #c-dot { width:60px; height:60px; background:rgba(0,229,204,0.12); }
-body.cursor-hover #c-ring { width:60px; height:60px; border-color:rgba(0,229,204,0.8); }
-
-/* ═══════════════════════════════════
-   NOISE GRAIN OVERLAY
-═══════════════════════════════════ */
-body::before {
-  content:''; position:fixed; inset:0; z-index:1; pointer-events:none;
-  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.035'/%3E%3C/svg%3E");
-  opacity:.4;
+#c-dot.hov { width:52px; height:52px; background:rgba(14,165,176,0.1); }
+#c-ring {
+  position:fixed; width:34px; height:34px;
+  border:1.5px solid rgba(14,165,176,0.45); border-radius:50%;
+  pointer-events:none; z-index:9998;
+  transform:translate(-50%,-50%);
+  transition:border-color .25s;
 }
 
-/* ═══════════════════════════════════
+/* ─────────────────────────────────────
    PROGRESS BAR
-═══════════════════════════════════ */
-#progress-bar {
-  position:fixed; top:0; left:0; height:2px; z-index:300;
-  background:var(--grad2); width:0%;
-  transition:width .08s linear;
+───────────────────────────────────── */
+#pgbar {
+  position:fixed; top:0; left:0; height:2.5px; z-index:500;
+  background:var(--grad2); width:0;
+  transition:width .07s linear;
+  border-radius:0 2px 2px 0;
 }
 
-/* ═══════════════════════════════════
-   CANVAS
-═══════════════════════════════════ */
-#bg-canvas {
-  position:fixed; inset:0; z-index:0; pointer-events:none; opacity:.6;
-}
-
-/* ═══════════════════════════════════
-   NAV
-═══════════════════════════════════ */
+/* ─────────────────────────────────────
+   NAVIGATION
+───────────────────────────────────── */
 nav {
   position:fixed; top:0; left:0; right:0; z-index:200;
   display:flex; align-items:center; justify-content:space-between;
-  padding:0 5%; height:76px;
-  transition:height .4s, background .4s, backdrop-filter .4s;
+  padding:0 6%; height:76px;
+  transition:height .35s, background .35s, box-shadow .35s;
 }
 nav.stuck {
-  height:62px;
-  background:rgba(5,6,8,0.85);
-  backdrop-filter:blur(24px) saturate(180%);
-  border-bottom:1px solid var(--border);
+  height:64px;
+  background:rgba(255,255,255,0.94);
+  backdrop-filter:blur(20px) saturate(180%);
+  box-shadow:0 1px 0 var(--border), 0 4px 24px rgba(26,26,46,0.04);
 }
 
-.n-logo { display:flex; align-items:center; gap:12px; text-decoration:none; }
-.n-logo-mark {
-  position:relative; width:38px; height:38px;
+.n-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.n-logo-eye {
+  width:36px; height:36px; border-radius:50%;
+  background:var(--teal-lt); border:1.5px solid var(--teal-mid);
+  display:flex; align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
 }
-.n-logo-mark svg { width:100%; height:100%; }
-.n-logo-name {
-  font-family:'Bebas Neue', sans-serif;
-  font-size:22px; letter-spacing:2px;
-  color:var(--white); line-height:1;
+.n-logo-eye::before {
+  content:''; position:absolute;
+  width:36px; height:14px;
+  background:var(--teal-mid); border-radius:50%;
 }
-.n-logo-name span { color:var(--cyan); }
+.n-logo-eye::after {
+  content:''; position:absolute;
+  width:12px; height:12px; border-radius:50%;
+  background:var(--teal); box-shadow:0 0 8px rgba(14,165,176,.5);
+}
+.n-logo-text {
+  font-family:'Fraunces', serif;
+  font-size:17px; font-weight:500; color:var(--ink); line-height:1;
+}
+.n-logo-text span { color:var(--teal); }
 
-.n-links { display:flex; gap:40px; list-style:none; }
+.n-links { display:flex; gap:36px; list-style:none; }
 .n-links a {
-  font-size:12px; font-weight:500; letter-spacing:1.8px; text-transform:uppercase;
-  color:var(--dim); text-decoration:none; transition:color .25s; position:relative;
+  font-size:13px; font-weight:500; letter-spacing:.3px;
+  color:var(--ink3); text-decoration:none;
+  transition:color .2s; position:relative;
 }
-.n-links a::before {
-  content:''; position:absolute; bottom:-3px; left:0; right:0; height:1px;
-  background:var(--cyan); transform:scaleX(0); transform-origin:right;
-  transition:transform .3s cubic-bezier(.4,0,.2,1);
+.n-links a::after {
+  content:''; position:absolute; bottom:-4px; left:0; right:0;
+  height:1.5px; background:var(--teal); border-radius:1px;
+  transform:scaleX(0); transform-origin:right;
+  transition:transform .28s ease;
 }
-.n-links a:hover { color:var(--white); }
-.n-links a:hover::before { transform:scaleX(1); transform-origin:left; }
+.n-links a:hover { color:var(--teal); }
+.n-links a:hover::after { transform:scaleX(1); transform-origin:left; }
 
 .n-cta {
-  position:relative; display:inline-flex; align-items:center; gap:8px;
-  padding:11px 26px; border-radius:100px; overflow:hidden;
-  font-family:'Outfit',sans-serif; font-size:13px; font-weight:600;
-  text-decoration:none; color:var(--bg); letter-spacing:.3px;
-  transition:transform .3s, box-shadow .3s;
+  display:inline-flex; align-items:center; gap:8px;
+  padding:11px 24px; border-radius:100px;
+  background:var(--teal); color:white;
+  font-size:13px; font-weight:600;
+  text-decoration:none; letter-spacing:.2px;
+  transition:all .28s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 2px 16px rgba(14,165,176,.28);
 }
-.n-cta::before {
-  content:''; position:absolute; inset:0;
-  background:var(--grad2); z-index:0;
-  transition:opacity .3s;
-}
-.n-cta:hover { transform:translateY(-2px); box-shadow:0 8px 32px rgba(0,229,204,.35); }
-.n-cta span { position:relative; z-index:1; }
+.n-cta:hover { background:var(--teal2); transform:translateY(-2px); box-shadow:0 8px 28px rgba(14,165,176,.38); }
 
-/* Hamburger */
-.n-ham {
-  display:none; flex-direction:column; gap:5px;
-  background:none; border:none; cursor:none; padding:4px;
-}
-.n-ham i { display:block; width:24px; height:1.5px; background:var(--white); border-radius:2px; transition:all .3s; }
-.n-ham.open i:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
-.n-ham.open i:nth-child(2) { opacity:0; transform:scaleX(0); }
-.n-ham.open i:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
+.n-ham { display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:none; }
+.n-ham span { width:22px; height:1.5px; background:var(--ink); border-radius:2px; transition:all .3s; display:block; }
+.n-ham.open span:nth-child(1) { transform:translateY(6.5px) rotate(45deg); }
+.n-ham.open span:nth-child(2) { opacity:0; }
+.n-ham.open span:nth-child(3) { transform:translateY(-6.5px) rotate(-45deg); }
 
 .n-mobile {
-  display:none; position:fixed; inset:0; top:62px; z-index:190;
-  background:rgba(5,6,8,0.97); backdrop-filter:blur(32px);
-  flex-direction:column; align-items:center; justify-content:center; gap:32px;
-  opacity:0; pointer-events:none; transition:opacity .4s;
+  position:fixed; inset:0; top:64px; z-index:190;
+  background:rgba(255,255,255,.97); backdrop-filter:blur(20px);
+  display:flex; flex-direction:column; align-items:center; justify-content:center; gap:24px;
+  opacity:0; pointer-events:none; transition:opacity .3s;
 }
-.n-mobile.open { opacity:1; pointer-events:auto; display:flex; }
-.n-mobile a { font-family:'Bebas Neue',sans-serif; font-size:36px; letter-spacing:3px; color:var(--dim); text-decoration:none; transition:color .2s, transform .2s; }
-.n-mobile a:hover { color:var(--cyan); transform:translateX(8px); }
-
+.n-mobile.open { opacity:1; pointer-events:auto; }
+.n-mobile a {
+  font-family:'Fraunces',serif; font-size:34px; font-weight:500; font-style:italic;
+  color:var(--ink3); text-decoration:none; transition:color .2s;
+}
+.n-mobile a:hover { color:var(--teal); }
 @media(max-width:900px) { .n-links,.n-cta{display:none} .n-ham{display:flex} }
 
-/* ═══════════════════════════════════
+/* ─────────────────────────────────────
    HERO
-═══════════════════════════════════ */
+───────────────────────────────────── */
 .hero {
-  position:relative; z-index:10;
   min-height:100vh;
+  padding:76px 6% 0;
+  position:relative; overflow:hidden;
+  background:var(--white);
   display:grid; grid-template-rows:1fr auto;
-  padding:0 5%; padding-top:76px;
-  overflow:hidden;
+}
+
+/* Soft background blobs */
+.hero-blob {
+  position:absolute; border-radius:50%; filter:blur(80px);
+  pointer-events:none;
+}
+.blob-1 {
+  width:600px; height:600px;
+  background:radial-gradient(circle, rgba(14,165,176,.08) 0%, transparent 70%);
+  top:-100px; right:-100px; animation:blobDrift 12s ease-in-out infinite;
+}
+.blob-2 {
+  width:400px; height:400px;
+  background:radial-gradient(circle, rgba(74,158,255,.06) 0%, transparent 70%);
+  bottom:10%; left:-80px; animation:blobDrift 15s ease-in-out infinite reverse;
+}
+.blob-3 {
+  width:300px; height:300px;
+  background:radial-gradient(circle, rgba(255,107,74,.05) 0%, transparent 70%);
+  top:40%; right:10%; animation:blobDrift 10s ease-in-out infinite 3s;
+}
+@keyframes blobDrift {
+  0%,100% { transform:translate(0,0) scale(1); }
+  33%      { transform:translate(20px,-20px) scale(1.05); }
+  66%      { transform:translate(-15px,15px) scale(.97); }
 }
 
 .hero-main {
-  display:flex; flex-direction:column; justify-content:center;
-  padding:60px 0;
-  max-width:900px;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+  text-align:center; padding:60px 0 40px; position:relative; z-index:5;
 }
 
-.hero-eyebrow {
-  display:inline-flex; align-items:center; gap:10px;
-  margin-bottom:32px;
-  opacity:0; animation:fadeUp .6s .3s both;
+/* Eyebrow pill */
+.hero-pill {
+  display:inline-flex; align-items:center; gap:8px;
+  padding:6px 16px 6px 8px;
+  background:var(--teal-lt); border:1px solid var(--teal-mid);
+  border-radius:100px; margin-bottom:30px;
+  opacity:0; animation:fadeUp .6s .2s both;
 }
-.eyebrow-line {
-  display:flex; gap:4px;
+.hp-badge {
+  background:var(--teal); color:white;
+  font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
+  padding:3px 10px; border-radius:100px;
 }
-.eyebrow-line span {
-  width:6px; height:6px; border-radius:50%; background:var(--cyan);
-  animation:dotPulse 2s ease-in-out infinite;
-}
-.eyebrow-line span:nth-child(2) { animation-delay:.3s; background:var(--blue); }
-.eyebrow-line span:nth-child(3) { animation-delay:.6s; background:#9B5DE5; }
-.eyebrow-text {
-  font-size:11px; font-weight:600; letter-spacing:3px; text-transform:uppercase;
-  color:var(--cyan);
-}
+.hp-text { font-size:12px; font-weight:500; color:var(--teal); letter-spacing:.3px; }
 
-@keyframes dotPulse { 0%,100%{transform:scale(1);opacity:.5} 50%{transform:scale(1.4);opacity:1} }
-
+/* Heading */
 .hero-h1 {
-  font-family:'DM Serif Display', serif;
-  font-size:clamp(56px,8.5vw,120px);
-  line-height:.95; letter-spacing:-3px;
-  margin-bottom:32px;
-  opacity:0; animation:fadeUp .8s .5s both;
+  font-family:'Fraunces', serif;
+  font-size:clamp(52px, 8vw, 108px);
+  font-weight:500; line-height:.97; letter-spacing:-3px;
+  color:var(--ink); margin-bottom:28px;
+  opacity:0; animation:fadeUp .85s .35s both;
 }
-.hero-h1 .word-wrap { overflow:hidden; display:block; }
-.hero-h1 .gradient-word {
+.hero-h1 .italic-word {
+  font-style:italic; font-weight:300;
   background:var(--grad2);
   -webkit-background-clip:text; -webkit-text-fill-color:transparent;
   background-clip:text;
-  font-style:italic;
 }
-.hero-h1 .stroke-word {
-  -webkit-text-stroke:1.5px rgba(255,255,255,0.2);
+.hero-h1 .outline-word {
+  -webkit-text-stroke:1.5px rgba(26,26,46,.18);
   -webkit-text-fill-color:transparent;
 }
 
-.hero-body {
-  display:grid; grid-template-columns:1fr auto; gap:40px; align-items:flex-end;
-  opacity:0; animation:fadeUp .8s .7s both;
+.hero-sub {
+  font-size:18px; line-height:1.7; color:var(--ink3); font-weight:300;
+  max-width:560px; margin:0 auto 44px;
+  opacity:0; animation:fadeUp .8s .5s both;
 }
-.hero-desc {
-  font-size:17px; line-height:1.75; color:var(--off); font-weight:300;
-  max-width:520px;
-}
-.hero-desc strong { color:var(--white); font-weight:500; }
+.hero-sub strong { color:var(--ink); font-weight:500; }
 
-.hero-actions {
-  display:flex; flex-direction:column; gap:12px; align-items:flex-end;
-  flex-shrink:0;
-}
-.btn-mag {
-  position:relative; display:inline-flex; align-items:center; gap:10px;
-  padding:15px 34px; border-radius:100px;
-  font-family:'Outfit',sans-serif; font-size:14px; font-weight:600;
-  text-decoration:none; overflow:hidden; cursor:none;
-  transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
-}
-.btn-mag-fill {
-  background:var(--grad2); color:var(--bg);
-  box-shadow:0 0 0 rgba(0,229,204,0);
-}
-.btn-mag-fill:hover { box-shadow:0 12px 40px rgba(0,229,204,.4); }
-.btn-mag-fill .btn-ripple {
-  position:absolute; inset:0; background:rgba(255,255,255,0.15);
-  transform:scaleX(0); transform-origin:left; transition:transform .4s ease;
-}
-.btn-mag-fill:hover .btn-ripple { transform:scaleX(1); }
-.btn-mag span { position:relative; z-index:1; }
-.btn-mag svg { width:16px; height:16px; position:relative; z-index:1; transition:transform .3s; flex-shrink:0; }
-.btn-mag:hover svg { transform:translate(3px,-2px); }
-.btn-mag-outline {
-  background:transparent; color:var(--off);
-  border:1px solid var(--border2);
-}
-.btn-mag-outline:hover { border-color:rgba(255,255,255,.35); color:var(--white); background:rgba(255,255,255,.03); }
-
-/* Hero scroll cue */
-.hero-scroll {
-  display:flex; align-items:center; gap:14px;
-  padding:28px 0;
-  opacity:0; animation:fadeIn 1s 1.4s both;
-}
-.scroll-line {
-  width:50px; height:1px; background:var(--border2);
-  position:relative; overflow:hidden;
-}
-.scroll-line::after {
-  content:''; position:absolute; inset:0;
-  background:var(--cyan); animation:scanLine 2s ease-in-out infinite;
-}
-@keyframes scanLine { 0%{transform:translateX(-100%)} 100%{transform:translateX(100%)} }
-.scroll-label { font-size:11px; letter-spacing:2px; text-transform:uppercase; color:var(--dim); }
-
-/* Hero floating marquee */
-.hero-marquee {
-  position:absolute; bottom:0; left:0; right:0;
-  padding:18px 0; border-top:1px solid var(--border);
-  background:rgba(5,6,8,0.6); backdrop-filter:blur(12px);
-  overflow:hidden; z-index:5;
-}
-.marquee-inner {
-  display:flex; gap:0; animation:marqueeRun 25s linear infinite; white-space:nowrap;
-}
-.m-item {
-  display:inline-flex; align-items:center; gap:32px;
-  padding:0 32px; flex-shrink:0;
-  font-size:11px; letter-spacing:3px; text-transform:uppercase; color:var(--dim);
-  font-weight:500;
-}
-.m-sep { width:4px; height:4px; border-radius:50%; background:var(--cyan); opacity:.6; }
-@keyframes marqueeRun { from{transform:translateX(0)} to{transform:translateX(-50%)} }
-
-/* ═══════════════════════════════════
-   SECTIONS
-═══════════════════════════════════ */
-.section { position:relative; z-index:10; padding:130px 5%; }
-
-.overline {
-  display:inline-flex; align-items:center; gap:12px; margin-bottom:18px;
-  font-size:10px; font-weight:600; letter-spacing:3.5px; text-transform:uppercase; color:var(--cyan);
-}
-.overline::before { content:''; width:28px; height:1px; background:var(--cyan); }
-
-.display-heading {
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(36px,4.5vw,60px);
-  line-height:1.08; letter-spacing:-1.5px; margin-bottom:0;
-}
-.display-heading em { font-style:italic; color:var(--cyan); }
-.display-heading .stroke {
-  -webkit-text-stroke:1px rgba(255,255,255,.2);
-  -webkit-text-fill-color:transparent;
+.hero-btns {
+  display:flex; gap:12px; justify-content:center; flex-wrap:wrap;
+  opacity:0; animation:fadeUp .8s .65s both;
 }
 
-/* ═══════════════════════════════════
-   IMPACT NUMBERS
-═══════════════════════════════════ */
-.impact { background:var(--bg2); overflow:hidden; }
-.impact-grid {
-  display:grid; grid-template-columns:repeat(3,1fr);
-  border:1px solid var(--border);
-  border-radius:24px; overflow:hidden;
+/* Buttons */
+.btn {
+  display:inline-flex; align-items:center; gap:9px;
+  padding:14px 30px; border-radius:100px;
+  font-size:14px; font-weight:600; text-decoration:none;
+  cursor:none; transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  letter-spacing:.2px;
 }
-.impact-cell {
-  padding:52px 44px;
+.btn-fill {
+  background:var(--ink); color:white;
+  box-shadow:0 2px 20px rgba(26,26,46,.18);
+}
+.btn-fill:hover { background:var(--teal); transform:translateY(-3px); box-shadow:0 10px 32px rgba(14,165,176,.35); }
+.btn-teal {
+  background:var(--teal); color:white;
+  box-shadow:0 2px 20px rgba(14,165,176,.28);
+}
+.btn-teal:hover { background:var(--teal2); transform:translateY(-3px); box-shadow:0 10px 32px rgba(14,165,176,.4); }
+.btn-ghost {
+  background:transparent; color:var(--ink3);
+  border:1.5px solid var(--border2);
+}
+.btn-ghost:hover { border-color:var(--teal); color:var(--teal); background:var(--teal-lt); transform:translateY(-2px); }
+.btn svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2; flex-shrink:0; transition:transform .25s; }
+.btn:hover svg { transform:translate(2px,-2px); }
+
+/* Stats row */
+.hero-stats {
+  display:flex; gap:0; justify-content:center;
+  margin-top:56px; padding-top:40px;
+  border-top:1px solid var(--border);
+  opacity:0; animation:fadeUp .8s .85s both;
+  flex-wrap:wrap;
+}
+.hs-item {
+  padding:0 44px; text-align:center;
   border-right:1px solid var(--border);
-  position:relative; overflow:hidden;
-  transition:background .4s;
 }
-.impact-cell:last-child { border-right:none; }
-.impact-cell:hover { background:rgba(0,229,204,.03); }
-.impact-cell::after {
-  content:''; position:absolute; top:0; left:0; right:0; height:1px;
-  background:var(--grad2); transform:scaleX(0); transition:transform .5s ease;
-}
-.impact-cell:hover::after { transform:scaleX(1); }
-
-.ic-tag { font-size:10px; letter-spacing:2.5px; text-transform:uppercase; color:var(--cyan); font-weight:600; margin-bottom:20px; }
-.ic-num {
-  font-family:'Bebas Neue',sans-serif;
-  font-size:clamp(60px,7vw,88px);
-  line-height:.9; letter-spacing:-1px;
+.hs-item:last-child { border-right:none; }
+.hs-num {
+  font-family:'Fraunces',serif; font-size:clamp(30px,4vw,44px);
+  font-weight:500; color:var(--ink); line-height:1;
   background:var(--grad2); -webkit-background-clip:text;
   -webkit-text-fill-color:transparent; background-clip:text;
+}
+.hs-label { font-size:12px; color:var(--muted); margin-top:5px; font-weight:400; letter-spacing:.3px; }
+
+/* Hero scroll ticker */
+.hero-ticker {
+  padding:18px 0; border-top:1px solid var(--border);
+  overflow:hidden; position:relative; z-index:5;
+  opacity:0; animation:fadeIn 1s 1.2s both;
+}
+.ticker-track {
+  display:flex; white-space:nowrap;
+  animation:tickerRun 30s linear infinite;
+}
+.t-item {
+  display:inline-flex; align-items:center; gap:24px;
+  padding:0 24px; flex-shrink:0;
+  font-size:12px; font-weight:500; letter-spacing:2px; text-transform:uppercase;
+  color:var(--muted);
+}
+.t-dot { width:4px; height:4px; border-radius:50%; background:var(--teal); opacity:.6; }
+@keyframes tickerRun { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+/* ─────────────────────────────────────
+   SECTIONS
+───────────────────────────────────── */
+.section { padding:120px 6%; position:relative; z-index:10; }
+
+.tag {
+  display:inline-flex; align-items:center; gap:10px;
+  font-size:11px; font-weight:600; letter-spacing:2.5px; text-transform:uppercase; color:var(--teal);
   margin-bottom:16px;
 }
-.ic-text { font-size:15px; color:var(--off); font-weight:300; line-height:1.65; max-width:280px; }
-.ic-icon {
-  position:absolute; bottom:-10px; right:20px;
-  font-size:100px; opacity:.03;
-  transition:opacity .4s, transform .4s;
+.tag::before { content:''; width:24px; height:1.5px; background:var(--teal); border-radius:1px; }
+
+.display {
+  font-family:'Fraunces', serif;
+  font-size:clamp(34px,4vw,54px);
+  font-weight:500; line-height:1.1; letter-spacing:-1.5px;
 }
-.impact-cell:hover .ic-icon { opacity:.06; transform:scale(1.1) rotate(-5deg); }
+.display em { font-style:italic; font-weight:300; color:var(--teal); }
 
-/* ═══════════════════════════════════
-   MISSION — HORIZONTAL SCROLL FEEL
-═══════════════════════════════════ */
-.mission {
-  background:var(--surface);
-  border-top:1px solid var(--border);
-  border-bottom:1px solid var(--border);
+/* ─────────────────────────────────────
+   IMPACT — CARD GRID
+───────────────────────────────────── */
+.impact { background:var(--paper); }
+.impact-cards {
+  display:grid; grid-template-columns:repeat(3,1fr);
+  gap:16px; margin-top:0;
 }
-.mission-layout { display:grid; grid-template-columns:1fr 1fr; gap:100px; align-items:center; }
-
-.mission-left {}
-.mission-left p { font-size:16px; color:var(--off); line-height:1.85; font-weight:300; margin:24px 0 44px; }
-
-.pillars { display:flex; flex-direction:column; gap:2px; }
-.pillar {
-  display:flex; align-items:center; gap:20px;
-  padding:22px 24px; border-radius:12px;
-  border:1px solid transparent;
+.imp-card {
+  background:white; border:1px solid var(--border);
+  border-radius:20px; padding:40px 36px;
+  position:relative; overflow:hidden;
   transition:all .35s cubic-bezier(.4,0,.2,1);
   cursor:none;
 }
-.pillar:hover { background:rgba(0,229,204,.04); border-color:rgba(0,229,204,.18); transform:translateX(8px); }
-.pillar-num {
-  font-family:'Bebas Neue',sans-serif; font-size:13px; letter-spacing:2px;
-  color:var(--dim); width:24px; flex-shrink:0;
-  transition:color .3s;
+.imp-card:hover { transform:translateY(-6px); box-shadow:0 20px 60px rgba(26,26,46,.08); border-color:rgba(14,165,176,.3); }
+.imp-card::before {
+  content:''; position:absolute; top:0; left:0; right:0; height:3px;
+  background:var(--grad2); border-radius:20px 20px 0 0;
+  transform:scaleX(0); transition:transform .35s ease;
 }
-.pillar:hover .pillar-num { color:var(--cyan); }
-.pillar-dot {
-  width:36px; height:36px; border-radius:10px; flex-shrink:0;
-  background:rgba(0,229,204,.08); border:1px solid rgba(0,229,204,.15);
-  display:flex; align-items:center; justify-content:center; font-size:15px;
+.imp-card:hover::before { transform:scaleX(1); }
+.imp-tag { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--teal); margin-bottom:16px; }
+.imp-num {
+  font-family:'Fraunces',serif; font-size:clamp(52px,6vw,76px);
+  font-weight:500; line-height:.9; letter-spacing:-2px;
+  color:var(--ink); margin-bottom:14px;
+}
+.imp-num span {
+  background:var(--grad2); -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent; background-clip:text;
+}
+.imp-text { font-size:15px; color:var(--ink3); line-height:1.65; font-weight:300; }
+.imp-bg {
+  position:absolute; right:16px; bottom:10px;
+  font-size:80px; opacity:.04;
+  transition:opacity .35s, transform .5s;
+}
+.imp-card:hover .imp-bg { opacity:.07; transform:scale(1.15) rotate(-5deg); }
+
+/* ─────────────────────────────────────
+   MISSION
+───────────────────────────────────── */
+.mission { background:white; }
+.mission-layout { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+
+.mission-left {}
+.mission-left p { font-size:16px; color:var(--ink3); line-height:1.85; font-weight:300; margin:20px 0 40px; }
+
+.pillars { display:flex; flex-direction:column; gap:3px; }
+.pillar {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:20px 22px; border-radius:14px;
+  border:1.5px solid transparent;
+  transition:all .3s cubic-bezier(.4,0,.2,1); cursor:none;
+}
+.pillar:hover { background:var(--teal-lt); border-color:var(--teal-mid); transform:translateX(6px); }
+.p-num {
+  font-family:'Fraunces',serif; font-size:12px; font-weight:500;
+  color:var(--teal); width:20px; flex-shrink:0; margin-top:2px; letter-spacing:.5px;
+}
+.p-icon {
+  width:38px; height:38px; border-radius:10px; flex-shrink:0;
+  background:var(--teal-lt); border:1px solid var(--teal-mid);
+  display:flex; align-items:center; justify-content:center; font-size:16px;
   transition:all .3s;
 }
-.pillar:hover .pillar-dot { background:rgba(0,229,204,.15); border-color:rgba(0,229,204,.35); transform:rotate(5deg); }
-.pillar-content strong { display:block; font-size:14px; font-weight:600; margin-bottom:3px; }
-.pillar-content span { font-size:13px; color:var(--dim); font-weight:300; line-height:1.5; }
+.pillar:hover .p-icon { background:var(--teal); transform:rotate(-5deg) scale(1.1); }
+.p-content strong { display:block; font-size:14px; font-weight:600; color:var(--ink); margin-bottom:3px; }
+.p-content span { font-size:13px; color:var(--muted); font-weight:300; line-height:1.55; }
 
-/* Orbital Eye Visualization */
-.mission-right { position:relative; display:flex; align-items:center; justify-content:center; }
-.eye-system {
+/* Mission visual — bright eye illustration */
+.mission-right { display:flex; align-items:center; justify-content:center; }
+.eye-world {
   position:relative; width:420px; height:420px;
 }
-.orbit {
-  position:absolute; top:50%; left:50%;
-  border-radius:50%; border:1px solid;
+
+.ew-bg-circle {
+  position:absolute; top:50%; left:50%; border-radius:50%;
   transform:translate(-50%,-50%);
-  animation:orbitSpin linear infinite;
-}
-@keyframes orbitSpin { to { transform:translate(-50%,-50%) rotate(360deg); } }
-
-.orbit-dot {
-  position:absolute; border-radius:50%;
-  top:0; left:50%; transform:translateX(-50%) translateY(-50%);
+  background:radial-gradient(circle, var(--teal-lt) 0%, rgba(235,244,255,.5) 60%, transparent 80%);
+  width:380px; height:380px;
 }
 
-.eye-core {
-  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%);
-  width:150px; height:150px; border-radius:50%;
+.ew-ring {
+  position:absolute; top:50%; left:50%;
+  border-radius:50%; border:1.5px solid;
+  transform:translate(-50%,-50%);
+  animation:ringOrbit linear infinite;
 }
-.eye-iris {
-  width:100%; height:100%; border-radius:50%;
-  background:conic-gradient(from 0deg, #00E5CC10, #3D6FFF25, #9B5DE520, #00E5CC10);
-  border:2px solid rgba(0,229,204,.35);
-  animation:irisRotate 8s linear infinite;
+@keyframes ringOrbit { to { transform:translate(-50%,-50%) rotate(360deg); } }
+
+.ew-orbit-dot {
+  position:absolute; top:0; left:50%;
+  border-radius:50%;
+  transform:translateX(-50%) translateY(-50%);
+  box-shadow:0 0 8px currentColor;
+}
+
+/* Eye shape */
+.ew-eye {
+  position:absolute; top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:160px; height:100px;
+}
+.ew-eye-bg {
+  width:100%; height:100%;
+  background:white;
+  border-radius:50%;
+  border:2px solid var(--teal-mid);
+  box-shadow:0 4px 32px rgba(14,165,176,.15);
   display:flex; align-items:center; justify-content:center;
-  box-shadow:0 0 60px rgba(0,229,204,.12), inset 0 0 40px rgba(0,0,0,.6);
+  overflow:hidden;
 }
-@keyframes irisRotate { to{transform:rotate(360deg)} }
-.eye-pupil {
-  width:52px; height:52px; border-radius:50%;
-  background:radial-gradient(circle at 35% 35%, #1a2060, #000);
-  border:1.5px solid rgba(0,229,204,.5);
-  box-shadow:0 0 24px rgba(0,229,204,.3), 0 0 8px rgba(0,229,204,.5) inset;
+.ew-iris {
+  width:72px; height:72px; border-radius:50%;
+  background:radial-gradient(circle at 40% 35%, #0BC4D0, #0EA5B0, #0677A8);
+  border:3px solid rgba(255,255,255,.8);
+  box-shadow:0 0 24px rgba(14,165,176,.4);
+  display:flex; align-items:center; justify-content:center;
+  animation:irisBreath 4s ease-in-out infinite;
+}
+@keyframes irisBreath { 0%,100%{transform:scale(1)} 50%{transform:scale(1.04)} }
+.ew-pupil {
+  width:30px; height:30px; border-radius:50%;
+  background:radial-gradient(circle at 35% 35%, #1a3a5c, #0a1a2e);
   position:relative;
 }
-.eye-pupil::after {
-  content:''; position:absolute; width:12px; height:12px; border-radius:50%;
-  background:rgba(255,255,255,.6); top:10px; right:10px;
+.ew-pupil::after {
+  content:''; position:absolute; width:8px; height:8px;
+  background:white; border-radius:50%; top:5px; right:5px; opacity:.85;
 }
 
-.eye-stat {
-  position:absolute; padding:12px 16px; border-radius:12px;
-  background:rgba(10,12,18,.9); border:1px solid var(--border2);
-  backdrop-filter:blur(16px);
+/* Floating stat chips */
+.ew-chip {
+  position:absolute; padding:10px 16px; border-radius:100px;
+  background:white; border:1.5px solid var(--border);
+  box-shadow:0 4px 20px rgba(26,26,46,.07);
+  display:flex; align-items:center; gap:8px;
+  animation:chipFloat ease-in-out infinite;
 }
-.eye-stat .es-n { font-family:'Bebas Neue',sans-serif; font-size:20px; color:var(--cyan); }
-.eye-stat .es-l { font-size:11px; color:var(--dim); font-weight:300; letter-spacing:.5px; }
+@keyframes chipFloat { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-8px)} }
+.chip-dot { width:8px; height:8px; border-radius:50%; }
+.chip-label { font-size:12px; font-weight:600; color:var(--ink); }
 
-/* ═══════════════════════════════════
-   PROBLEM CARDS — BENTO GRID
-═══════════════════════════════════ */
-.problem { background:var(--bg); }
-.bento {
-  display:grid;
-  grid-template-columns:repeat(12,1fr);
-  grid-template-rows:auto;
-  gap:16px;
-  margin-top:64px;
-}
-.bento-card {
-  background:var(--surface); border:1px solid var(--border);
+/* ─────────────────────────────────────
+   PROBLEM — BRIGHT BENTO
+───────────────────────────────────── */
+.problem { background:var(--paper); }
+.bento { display:grid; grid-template-columns:repeat(12,1fr); gap:14px; margin-top:60px; }
+
+.bc {
+  background:white; border:1.5px solid var(--border);
   border-radius:20px; padding:36px 32px;
   position:relative; overflow:hidden;
-  transition:border-color .35s, transform .35s cubic-bezier(.34,1.56,.64,1), background .35s;
-  cursor:none;
+  transition:all .35s cubic-bezier(.4,0,.2,1); cursor:none;
 }
-.bento-card:hover { border-color:rgba(0,229,204,.25); transform:translateY(-4px); background:rgba(0,229,204,.02); }
-.bento-card::before {
-  content:''; position:absolute; inset:0; border-radius:20px;
-  background:radial-gradient(circle at var(--mx,50%) var(--my,50%), rgba(0,229,204,.06) 0%, transparent 60%);
-  opacity:0; transition:opacity .4s;
-}
-.bento-card:hover::before { opacity:1; }
+.bc:hover { transform:translateY(-5px); box-shadow:0 16px 48px rgba(26,26,46,.07); border-color:rgba(14,165,176,.3); }
 
-.bc-1 { grid-column:span 7; }
+.bc-1 { grid-column:span 7; background:linear-gradient(135deg, #E8F7F8 0%, #EBF4FF 100%); border-color:var(--teal-mid); }
 .bc-2 { grid-column:span 5; }
 .bc-3 { grid-column:span 4; }
-.bc-4 { grid-column:span 4; }
+.bc-4 { grid-column:span 4; background:linear-gradient(135deg, #FFF0EC 0%, #FFF8F6 100%); border-color:rgba(255,107,74,.25); }
 .bc-5 { grid-column:span 4; }
 
-.bc-num {
-  font-family:'Bebas Neue',sans-serif; font-size:72px; letter-spacing:-2px;
-  background:var(--grad2); -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent; background-clip:text;
-  line-height:.9; margin-bottom:16px;
+.bc-chip {
+  display:inline-flex; align-items:center; gap:6px;
+  padding:4px 12px; border-radius:100px; margin-bottom:14px;
+  font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
 }
-.bc-title {
-  font-family:'DM Serif Display',serif;
-  font-size:clamp(20px,2vw,26px); margin-bottom:12px; line-height:1.2;
-}
-.bc-body { font-size:14px; color:var(--off); line-height:1.7; font-weight:300; }
-.bc-bg-icon { position:absolute; right:20px; bottom:10px; font-size:80px; opacity:.04; transition:opacity .4s, transform .5s; }
-.bento-card:hover .bc-bg-icon { opacity:.07; transform:scale(1.15) rotate(-8deg); }
+.chip-teal  { background:var(--teal-lt); color:var(--teal); border:1px solid var(--teal-mid); }
+.chip-coral { background:var(--coral-lt); color:var(--coral); border:1px solid rgba(255,107,74,.25); }
+.chip-sky   { background:var(--sky-lt); color:var(--sky); border:1px solid rgba(74,158,255,.25); }
+.chip-amber { background:var(--amber-lt); color:var(--amber); border:1px solid rgba(245,166,35,.25); }
 
-.bc-big-num {
-  font-family:'Bebas Neue',sans-serif; font-size:clamp(80px,10vw,140px);
-  line-height:.85; letter-spacing:-4px;
-  background:var(--grad2); -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent; background-clip:text;
+.bc-big {
+  font-family:'Fraunces',serif; font-size:clamp(60px,8vw,100px);
+  font-weight:500; line-height:.85; letter-spacing:-3px; color:var(--ink);
 }
-.bc-accent { display:inline-block; padding:4px 12px; border-radius:6px; font-size:12px; font-weight:600; letter-spacing:1px; text-transform:uppercase; margin-bottom:12px; }
-.bc-accent-cyan { background:rgba(0,229,204,.12); color:var(--cyan); border:1px solid rgba(0,229,204,.2); }
-.bc-accent-blue { background:rgba(61,111,255,.12); color:#7CA0FF; border:1px solid rgba(61,111,255,.2); }
-.bc-accent-gold { background:rgba(240,180,41,.1); color:var(--gold); border:1px solid rgba(240,180,41,.2); }
+.bc-big.teal { color:var(--teal); }
+.bc-big.coral { color:var(--coral); }
+.bc-title { font-family:'Fraunces',serif; font-size:clamp(18px,2vw,24px); color:var(--ink); margin-bottom:10px; font-weight:500; letter-spacing:-.5px; }
+.bc-body { font-size:14px; color:var(--ink3); line-height:1.7; font-weight:300; }
+.bc-bg-icon { position:absolute; right:16px; bottom:8px; font-size:70px; opacity:.05; transition:opacity .35s, transform .5s; }
+.bc:hover .bc-bg-icon { opacity:.09; transform:scale(1.15) rotate(-6deg); }
 
-/* ═══════════════════════════════════
-   TIPS — ALTERNATING LAYOUT
-═══════════════════════════════════ */
-.tips { background:var(--surface); border-top:1px solid var(--border); }
-.tips-list { margin-top:72px; display:flex; flex-direction:column; gap:2px; }
+/* ─────────────────────────────────────
+   TIPS — LIST ROWS (LIGHT)
+───────────────────────────────────── */
+.tips { background:white; }
+.tips-header { display:flex; align-items:flex-end; justify-content:space-between; flex-wrap:wrap; gap:20px; margin-bottom:60px; }
+
+.tip-rows { display:flex; flex-direction:column; gap:0; border-top:1px solid var(--border); }
 .tip-row {
-  display:grid; grid-template-columns:80px 1fr 1fr; gap:0;
-  align-items:stretch;
-  border-bottom:1px solid var(--border);
-  transition:background .3s;
-  cursor:none;
+  display:grid; grid-template-columns:72px 1fr 1fr;
+  align-items:stretch; border-bottom:1px solid var(--border);
+  transition:background .25s; cursor:none;
 }
-.tip-row:first-child { border-top:1px solid var(--border); }
-.tip-row:hover { background:rgba(0,229,204,.02); }
-.tip-index {
+.tip-row:hover { background:var(--paper); }
+
+.tr-index {
   display:flex; align-items:center; justify-content:center;
-  padding:32px 0;
-  font-family:'Bebas Neue',sans-serif; font-size:14px; letter-spacing:2px; color:var(--dim);
-  border-right:1px solid var(--border);
-  transition:color .3s;
+  padding:28px 0;
+  font-family:'Fraunces',serif; font-size:14px; font-weight:500;
+  color:rgba(26,26,46,.2); border-right:1px solid var(--border);
+  transition:color .25s;
 }
-.tip-row:hover .tip-index { color:var(--cyan); }
-.tip-main {
-  display:flex; align-items:center; gap:20px;
-  padding:32px 40px; border-right:1px solid var(--border);
+.tip-row:hover .tr-index { color:var(--teal); }
+
+.tr-main {
+  display:flex; align-items:center; gap:18px;
+  padding:28px 36px; border-right:1px solid var(--border);
 }
-.tip-icon-box {
-  width:52px; height:52px; border-radius:14px; flex-shrink:0;
-  background:rgba(0,229,204,.07); border:1px solid rgba(0,229,204,.12);
-  display:flex; align-items:center; justify-content:center; font-size:22px;
+.tr-icon {
+  width:50px; height:50px; border-radius:14px; flex-shrink:0;
+  background:var(--teal-lt); border:1px solid var(--teal-mid);
+  display:flex; align-items:center; justify-content:center; font-size:20px;
   transition:all .35s cubic-bezier(.34,1.56,.64,1);
 }
-.tip-row:hover .tip-icon-box {
-  background:rgba(0,229,204,.14); border-color:rgba(0,229,204,.3);
-  transform:rotate(-5deg) scale(1.1);
-}
-.tip-name { font-family:'DM Serif Display',serif; font-size:22px; }
-.tip-detail { padding:32px 40px; display:flex; align-items:center; }
-.tip-detail p { font-size:14px; color:var(--off); line-height:1.7; font-weight:300; max-width:380px; }
-.tip-arrow {
-  margin-left:auto; width:36px; height:36px; border-radius:50%;
-  border:1px solid var(--border2); display:flex; align-items:center; justify-content:center;
-  flex-shrink:0; transition:all .3s; font-size:16px;
-}
-.tip-row:hover .tip-arrow { background:var(--cyan); border-color:var(--cyan); color:var(--bg); }
+.tip-row:hover .tr-icon { background:var(--teal); transform:rotate(-6deg) scale(1.1); }
+.tr-name { font-family:'Fraunces',serif; font-size:22px; font-weight:500; letter-spacing:-.5px; color:var(--ink); }
 
-/* ═══════════════════════════════════
-   DONATION / JOIN
-═══════════════════════════════════ */
-.donate-section {
-  background:var(--bg);
-  overflow:hidden; position:relative;
+.tr-detail { display:flex; align-items:center; padding:28px 36px; }
+.tr-detail p { font-size:14px; color:var(--ink3); line-height:1.7; font-weight:300; max-width:380px; }
+.tr-arrow {
+  margin-left:auto; width:36px; height:36px; flex-shrink:0;
+  border:1.5px solid var(--border2); border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:16px; color:var(--muted);
+  transition:all .28s;
 }
-.donate-section::before {
-  content:''; position:absolute; inset:0;
-  background:radial-gradient(ellipse 70% 60% at 50% 50%, rgba(0,229,204,.05) 0%, transparent 65%);
+.tip-row:hover .tr-arrow { background:var(--teal); border-color:var(--teal); color:white; }
+
+/* ─────────────────────────────────────
+   DONATE / JOIN
+───────────────────────────────────── */
+.donate {
+  background:var(--paper);
+  position:relative; overflow:hidden;
+}
+.donate::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:
+    radial-gradient(ellipse 60% 50% at 80% 50%, rgba(14,165,176,.06) 0%, transparent 65%),
+    radial-gradient(ellipse 40% 60% at 10% 60%, rgba(74,158,255,.04) 0%, transparent 55%);
 }
 
 .donate-layout { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; position:relative; z-index:2; }
 
-.donate-left .display-heading { margin-bottom:24px; }
-.donate-left p { font-size:16px; color:var(--off); font-weight:300; line-height:1.8; margin-bottom:44px; }
+.donate-left {}
+.donate-left .display { margin:14px 0 18px; }
+.donate-left > p { font-size:16px; color:var(--ink3); font-weight:300; line-height:1.8; margin-bottom:44px; }
 
-.give-ways { display:flex; flex-direction:column; gap:12px; }
-.gw {
-  display:flex; align-items:center; gap:18px; padding:18px 22px;
-  border:1px solid var(--border); border-radius:14px;
-  background:rgba(255,255,255,.015);
-  transition:all .35s cubic-bezier(.4,0,.2,1);
+.give-list { display:flex; flex-direction:column; gap:10px; }
+.give-item {
+  display:flex; align-items:flex-start; gap:16px;
+  padding:18px 22px; border-radius:14px;
+  background:white; border:1.5px solid var(--border);
+  transition:all .3s cubic-bezier(.4,0,.2,1);
 }
-.gw:hover { border-color:rgba(0,229,204,.3); background:rgba(0,229,204,.03); transform:translateX(6px); }
-.gw-icon {
-  width:46px; height:46px; border-radius:12px; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center; font-size:20px;
+.give-item:hover { border-color:rgba(14,165,176,.35); transform:translateX(6px); box-shadow:0 4px 20px rgba(26,26,46,.05); }
+.give-icon {
+  width:44px; height:44px; border-radius:12px; flex-shrink:0;
+  background:var(--teal-lt); border:1px solid var(--teal-mid);
+  display:flex; align-items:center; justify-content:center; font-size:18px;
   transition:transform .3s;
 }
-.gw:hover .gw-icon { transform:rotate(-8deg) scale(1.15); }
-.gw-text strong { display:block; font-size:14px; font-weight:600; margin-bottom:3px; }
-.gw-text span { font-size:13px; color:var(--dim); font-weight:300; line-height:1.5; }
+.give-item:hover .give-icon { transform:rotate(-6deg) scale(1.1); }
+.give-text strong { display:block; font-size:14px; font-weight:600; color:var(--ink); margin-bottom:3px; }
+.give-text span { font-size:13px; color:var(--muted); font-weight:300; line-height:1.5; }
 
 /* Donate card */
 .donate-card {
-  background:var(--surface2); border:1px solid var(--border2);
-  border-radius:28px; padding:52px 44px; text-align:center;
-  position:relative; overflow:hidden;
+  background:white; border:1.5px solid var(--border);
+  border-radius:24px; padding:48px 42px;
+  text-align:center; position:relative; overflow:hidden;
+  box-shadow:0 8px 48px rgba(26,26,46,.06);
 }
 .donate-card::before {
-  content:''; position:absolute; top:-60px; left:-60px; right:-60px;
-  height:200px; border-radius:50%;
-  background:radial-gradient(ellipse, rgba(0,229,204,.08), transparent);
+  content:''; position:absolute; top:-40px; left:50%;
+  transform:translateX(-50%);
+  width:240px; height:240px; border-radius:50%;
+  background:radial-gradient(circle, rgba(14,165,176,.07), transparent);
 }
-.donate-card-badge {
-  display:inline-flex; align-items:center; gap:6px; margin-bottom:28px;
-  padding:6px 14px; border-radius:100px; font-size:11px; font-weight:600; letter-spacing:1.5px; text-transform:uppercase;
-  background:rgba(0,229,204,.1); color:var(--cyan); border:1px solid rgba(0,229,204,.2);
+.dc-badge {
+  display:inline-flex; align-items:center; gap:6px; margin-bottom:24px;
+  padding:5px 14px; border-radius:100px;
+  background:var(--teal-lt); color:var(--teal);
+  border:1px solid var(--teal-mid);
+  font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase;
 }
 .dc-title {
-  font-family:'DM Serif Display',serif; font-size:32px; margin-bottom:16px;
-  background:var(--grad2); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
+  font-family:'Fraunces',serif; font-size:30px; font-weight:500;
+  letter-spacing:-.8px; color:var(--ink); margin-bottom:14px; line-height:1.15;
 }
-.dc-body { font-size:14px; color:var(--dim); font-weight:300; line-height:1.7; margin-bottom:36px; }
-
-.big-donate-btn {
+.dc-title em { font-style:italic; color:var(--teal); }
+.dc-body { font-size:14px; color:var(--ink3); font-weight:300; line-height:1.7; margin-bottom:32px; }
+.big-btn {
   display:inline-flex; align-items:center; gap:10px;
-  padding:18px 44px; border-radius:100px;
-  background:var(--grad2); color:var(--bg); text-decoration:none;
-  font-family:'Outfit',sans-serif; font-size:15px; font-weight:700;
-  transition:transform .3s cubic-bezier(.34,1.56,.64,1), box-shadow .3s;
-  box-shadow:0 0 0 rgba(0,229,204,0);
-  position:relative; z-index:1; cursor:none; letter-spacing:.3px;
+  padding:17px 40px; border-radius:100px;
+  background:var(--teal); color:white;
+  font-size:15px; font-weight:700; text-decoration:none;
+  cursor:none; letter-spacing:.2px;
+  transition:all .3s cubic-bezier(.34,1.56,.64,1);
+  box-shadow:0 4px 24px rgba(14,165,176,.3);
 }
-.big-donate-btn:hover { transform:translateY(-4px) scale(1.02); box-shadow:0 16px 48px rgba(0,229,204,.4); }
-.big-donate-btn svg { width:18px; height:18px; transition:transform .3s; }
-.big-donate-btn:hover svg { transform:rotate(-45deg); }
+.big-btn:hover { background:var(--teal2); transform:translateY(-3px); box-shadow:0 12px 40px rgba(14,165,176,.45); }
+.big-btn svg { width:16px; height:16px; stroke:currentColor; fill:none; stroke-width:2.5; transition:transform .25s; }
+.big-btn:hover svg { transform:rotate(-45deg); }
+.dc-note { font-size:12px; color:var(--muted); margin-top:14px; }
+.dc-trust { display:flex; justify-content:center; gap:20px; margin-top:24px; padding-top:20px; border-top:1px solid var(--border); }
+.trust-pill { display:flex; align-items:center; gap:5px; font-size:12px; color:var(--muted); }
+.trust-pill span { font-size:14px; }
 
-.dc-fine { font-size:12px; color:var(--dim); margin-top:16px; }
-.dc-trust { display:flex; justify-content:center; gap:20px; margin-top:28px; padding-top:24px; border-top:1px solid var(--border); }
-.trust-item { display:flex; align-items:center; gap:6px; font-size:12px; color:var(--dim); }
-.trust-item span { font-size:14px; }
-
-/* ═══════════════════════════════════
+/* ─────────────────────────────────────
    CONTACT
-═══════════════════════════════════ */
-.contact-section { background:var(--bg2); border-top:1px solid var(--border); }
-.contact-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-top:64px; }
+───────────────────────────────────── */
+.contact { background:white; }
+.contact-inner-grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; margin-top:64px; }
 
 .contact-left {}
-.contact-left p { font-size:15px; color:var(--off); line-height:1.8; font-weight:300; margin:20px 0 40px; }
+.contact-left p { font-size:15px; color:var(--ink3); font-weight:300; line-height:1.8; margin:18px 0 36px; }
 
-.contact-cards { display:flex; flex-direction:column; gap:12px; }
-.cc {
-  display:flex; align-items:center; gap:18px;
-  padding:20px 24px; border:1px solid var(--border);
-  border-radius:14px; background:rgba(255,255,255,.015);
-  text-decoration:none; color:var(--white);
+.contact-items { display:flex; flex-direction:column; gap:10px; }
+.ci {
+  display:flex; align-items:center; gap:16px;
+  padding:18px 22px; border-radius:14px;
+  background:var(--paper); border:1.5px solid var(--border);
+  text-decoration:none; color:var(--ink);
   transition:all .3s cubic-bezier(.4,0,.2,1);
 }
-.cc:hover { border-color:rgba(0,229,204,.3); background:rgba(0,229,204,.03); transform:translateX(6px); }
-.cc-icon-wrap {
-  width:46px; height:46px; border-radius:12px; flex-shrink:0;
-  display:flex; align-items:center; justify-content:center; font-size:20px;
-  background:rgba(0,229,204,.08); border:1px solid rgba(0,229,204,.12);
+.ci:hover { background:var(--teal-lt); border-color:var(--teal-mid); transform:translateX(6px); }
+.ci-ico {
+  width:44px; height:44px; border-radius:12px; flex-shrink:0;
+  background:var(--teal-lt); border:1px solid var(--teal-mid);
+  display:flex; align-items:center; justify-content:center; font-size:18px;
   transition:all .3s;
 }
-.cc:hover .cc-icon-wrap { transform:rotate(-5deg) scale(1.1); background:rgba(0,229,204,.15); }
-.cc-meta {}
-.cc-type { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--cyan); font-weight:600; margin-bottom:3px; }
-.cc-val { font-size:14px; font-weight:400; color:var(--off); }
-.cc:hover .cc-val { color:var(--white); }
+.ci:hover .ci-ico { background:var(--teal); transform:rotate(-5deg) scale(1.08); }
+.ci-type { font-size:10px; letter-spacing:1.8px; text-transform:uppercase; color:var(--teal); font-weight:700; margin-bottom:2px; }
+.ci-val { font-size:14px; color:var(--ink3); font-weight:400; }
+.ci:hover .ci-val { color:var(--ink); }
 
-.contact-right {
-  position:sticky; top:100px;
-}
-.social-heading { font-family:'DM Serif Display',serif; font-size:28px; margin-bottom:8px; }
-.social-sub { font-size:14px; color:var(--dim); font-weight:300; margin-bottom:32px; }
-
-.socials { display:flex; flex-direction:column; gap:12px; }
-.soc {
+.contact-right {}
+.cr-title { font-family:'Fraunces',serif; font-size:26px; font-weight:500; letter-spacing:-.5px; margin-bottom:6px; }
+.cr-sub { font-size:14px; color:var(--muted); font-weight:300; margin-bottom:28px; }
+.soc-list { display:flex; flex-direction:column; gap:10px; }
+.soc-item {
   display:flex; align-items:center; justify-content:space-between;
-  padding:20px 24px; border-radius:14px;
-  border:1px solid var(--border);
-  text-decoration:none; color:var(--white);
-  transition:all .3s; cursor:none;
+  padding:18px 22px; border-radius:14px;
+  background:var(--paper); border:1.5px solid var(--border);
+  text-decoration:none; color:var(--ink);
+  transition:all .3s;
 }
-.soc:hover { background:rgba(0,229,204,.03); border-color:rgba(0,229,204,.25); }
+.soc-item:hover { background:var(--teal-lt); border-color:var(--teal-mid); }
 .soc-left { display:flex; align-items:center; gap:14px; }
-.soc-ico { font-size:22px; }
-.soc-platform { font-size:14px; font-weight:500; }
-.soc-handle { font-size:12px; color:var(--dim); }
-.soc-arr { font-size:18px; color:var(--dim); transition:all .3s; }
-.soc:hover .soc-arr { color:var(--cyan); transform:translate(3px,-3px); }
+.soc-icon { font-size:22px; }
+.soc-platform { font-size:14px; font-weight:600; color:var(--ink); }
+.soc-handle { font-size:12px; color:var(--muted); margin-top:1px; }
+.soc-arr { font-size:18px; color:var(--muted); transition:all .25s; }
+.soc-item:hover .soc-arr { color:var(--teal); transform:translate(2px,-2px); }
 
-/* ═══════════════════════════════════
+/* ─────────────────────────────────────
    FOOTER
-═══════════════════════════════════ */
+───────────────────────────────────── */
 footer {
-  background:var(--bg); border-top:1px solid var(--border);
-  padding:40px 5%; position:relative; z-index:10;
+  background:var(--ink); padding:64px 6% 32px;
 }
-.footer-inner {
+.foot-top {
   display:flex; align-items:center; justify-content:space-between;
-  flex-wrap:wrap; gap:20px;
+  padding-bottom:40px; margin-bottom:40px;
+  border-bottom:1px solid rgba(255,255,255,.07);
+  flex-wrap:wrap; gap:24px;
 }
-.footer-brand { display:flex; align-items:center; gap:10px; text-decoration:none; }
-.footer-brand .logo-mark { width:30px; height:30px; }
-.footer-brand-name { font-family:'Bebas Neue',sans-serif; font-size:18px; letter-spacing:2px; color:var(--white); }
-.footer-brand-name span { color:var(--cyan); }
-.footer-copy { font-size:12px; color:var(--dim); font-weight:300; text-align:center; }
-.footer-copy a { color:var(--cyan); text-decoration:none; }
-.footer-links { display:flex; gap:24px; }
-.footer-links a { font-size:12px; color:var(--dim); text-decoration:none; transition:color .2s; }
-.footer-links a:hover { color:var(--white); }
+.foot-logo { display:flex; align-items:center; gap:10px; text-decoration:none; }
+.foot-logo-eye {
+  width:32px; height:32px; border-radius:50%;
+  border:1.5px solid rgba(14,165,176,.5);
+  display:flex; align-items:center; justify-content:center;
+}
+.foot-logo-eye::after { content:''; width:10px; height:10px; border-radius:50%; background:var(--teal); }
+.foot-brand { font-family:'Fraunces',serif; font-size:18px; font-weight:500; color:white; }
+.foot-brand span { color:var(--teal); }
+.foot-tagline { font-size:13px; color:rgba(255,255,255,.35); font-weight:300; }
+.foot-nav-links { display:flex; gap:32px; flex-wrap:wrap; }
+.foot-nav-links a { font-size:13px; color:rgba(255,255,255,.4); text-decoration:none; transition:color .2s; }
+.foot-nav-links a:hover { color:rgba(255,255,255,.8); }
+.foot-bottom {
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+.foot-copy { font-size:12px; color:rgba(255,255,255,.2); font-weight:300; }
+.foot-copy a { color:var(--teal); text-decoration:none; }
+.foot-made { font-size:12px; color:rgba(255,255,255,.2); }
 
-/* ═══════════════════════════════════
+/* ─────────────────────────────────────
    SCROLL REVEAL
-═══════════════════════════════════ */
-.rv { opacity:0; transform:translateY(40px); transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1); }
-.rv.in { opacity:1; transform:translateY(0); }
-.rv-l { opacity:0; transform:translateX(-40px); transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1); }
-.rv-l.in { opacity:1; transform:translateX(0); }
-.rv-r { opacity:0; transform:translateX(40px); transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1); }
-.rv-r.in { opacity:1; transform:translateX(0); }
-.rv-scale { opacity:0; transform:scale(.94); transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1); }
-.rv-scale.in { opacity:1; transform:scale(1); }
+───────────────────────────────────── */
+.rv  { opacity:0; transform:translateY(36px); transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1); }
+.rv-l{ opacity:0; transform:translateX(-36px); transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1); }
+.rv-r{ opacity:0; transform:translateX(36px); transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1); }
+.rv-s{ opacity:0; transform:scale(.95); transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1); }
+.rv.in,.rv-l.in,.rv-r.in,.rv-s.in { opacity:1; transform:none; }
 
-/* ═══════════════════════════════════
+/* ─────────────────────────────────────
    KEYFRAMES
-═══════════════════════════════════ */
-@keyframes fadeUp { from{opacity:0;transform:translateY(24px)} to{opacity:1;transform:translateY(0)} }
+───────────────────────────────────── */
+@keyframes fadeUp { from{opacity:0;transform:translateY(22px)} to{opacity:1;transform:translateY(0)} }
 @keyframes fadeIn { from{opacity:0} to{opacity:1} }
 
-/* ═══════════════════════════════════
+/* ─────────────────────────────────────
    RESPONSIVE
-═══════════════════════════════════ */
+───────────────────────────────────── */
 @media(max-width:1100px) {
   .bento { grid-template-columns:1fr 1fr; }
   .bc-1,.bc-2,.bc-3,.bc-4,.bc-5 { grid-column:span 1; }
   .bc-1 { grid-column:span 2; }
-  .eye-system { width:320px; height:320px; }
-  .mission-layout { gap:60px; }
 }
 @media(max-width:900px) {
-  .mission-layout { grid-template-columns:1fr; }
-  .donate-layout { grid-template-columns:1fr; gap:48px; }
-  .contact-grid { grid-template-columns:1fr; gap:48px; }
-  .contact-right { position:static; }
-  .tip-row { grid-template-columns:60px 1fr; }
-  .tip-detail { display:none; }
-  .hero-body { grid-template-columns:1fr; }
-  .hero-actions { align-items:flex-start; flex-direction:row; }
-  .impact-grid { grid-template-columns:1fr; }
-  .impact-cell { border-right:none; border-bottom:1px solid var(--border); }
-  .impact-cell:last-child { border-bottom:none; }
+  .mission-layout, .donate-layout, .contact-inner-grid { grid-template-columns:1fr; gap:48px; }
+  .eye-world { width:300px; height:300px; }
+  .impact-cards { grid-template-columns:1fr; }
+  .tip-row { grid-template-columns:52px 1fr; }
+  .tr-detail { display:none; }
+  .hero-stats { gap:0; }
+  .hs-item { padding:0 24px; }
 }
 @media(max-width:640px) {
-  .section { padding:90px 5%; }
+  .section { padding:80px 5%; }
   .bento { grid-template-columns:1fr; }
   .bc-1 { grid-column:span 1; }
-  .footer-inner { flex-direction:column; align-items:flex-start; }
-  .hero-actions { flex-direction:column; }
-  .tip-row { grid-template-columns:48px 1fr; }
+  .hero-h1 { letter-spacing:-2px; }
+  .hero-stats { flex-direction:column; gap:20px; }
+  .hs-item { border-right:none; border-bottom:1px solid var(--border); padding:16px 0; width:100%; }
+  .hs-item:last-child { border-bottom:none; }
 }
 </style>
 </head>
 <body>
 
-<!-- Progress -->
-<div id="progress-bar"></div>
-
-<!-- Canvas -->
-<canvas id="bg-canvas"></canvas>
-
 <!-- Cursor -->
 <div id="c-dot"></div>
 <div id="c-ring"></div>
 
+<!-- Progress -->
+<div id="pgbar"></div>
+
 <!-- Mobile nav -->
-<div class="n-mobile" id="nmobile">
+<div class="n-mobile" id="nmob">
   <a href="#home" onclick="closeMenu()">Home</a>
-  <a href="#about" onclick="closeMenu()">Our Aim</a>
+  <a href="#mission" onclick="closeMenu()">Our Aim</a>
   <a href="#donate" onclick="closeMenu()">Donate</a>
-  <a href="#resources" onclick="closeMenu()">Resources</a>
+  <a href="#tips" onclick="closeMenu()">Eye Health</a>
   <a href="#contact" onclick="closeMenu()">Contact</a>
 </div>
 
 <!-- NAV -->
-<nav id="nav">
+<nav id="mainnav">
   <a href="#home" class="n-logo">
-    <div class="n-logo-mark">
-      <svg viewBox="0 0 38 38" fill="none">
-        <circle cx="19" cy="19" r="18" stroke="#00E5CC" stroke-width="1"/>
-        <ellipse cx="19" cy="19" rx="12" ry="7" stroke="rgba(0,229,204,.4)" stroke-width="1"/>
-        <circle cx="19" cy="19" r="5" fill="#00E5CC" opacity=".9"/>
-        <circle cx="17.5" cy="17.5" r="1.5" fill="white" opacity=".7"/>
-      </svg>
-    </div>
-    <span class="n-logo-name">Vision<span>for</span>Change</span>
+    <div class="n-logo-eye"></div>
+    <span class="n-logo-text">Vision for <span>Change</span></span>
   </a>
   <ul class="n-links">
     <li><a href="#home">Home</a></li>
-    <li><a href="#about">Mission</a></li>
-    <li><a href="#resources">Impact</a></li>
+    <li><a href="#mission">Mission</a></li>
+    <li><a href="#problem">Impact</a></li>
     <li><a href="#tips">Eye Health</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTK_PN2sIn9YGsXqR97BFPVaWW6oPix-yyXlw8b3ifZ2gABw/viewform?usp=dialog" target="_blank" class="n-cta">
-    <span>Donate Now</span>
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    Donate Now ↗
   </a>
   <button class="n-ham" id="nham" onclick="toggleMenu()">
-    <i></i><i></i><i></i>
+    <span></span><span></span><span></span>
   </button>
 </nav>
 
 <!-- ═══ HERO ═══ -->
 <section class="hero" id="home">
+  <div class="hero-blob blob-1"></div>
+  <div class="hero-blob blob-2"></div>
+  <div class="hero-blob blob-3"></div>
+
   <div class="hero-main">
-    <div class="hero-eyebrow">
-      <div class="eyebrow-line">
-        <span></span><span></span><span></span>
-      </div>
-      <span class="eyebrow-text">Youth-Led Initiative · Est. 2026</span>
+    <div class="hero-pill">
+      <span class="hp-badge">New</span>
+      <span class="hp-text">Youth-Led Initiative · Est. 2026</span>
     </div>
 
     <h1 class="hero-h1">
-      <span class="word-wrap">Clear Eyes.</span>
-      <span class="word-wrap"><span class="gradient-word">Brighter</span></span>
-      <span class="word-wrap"><span class="stroke-word">Futures.</span></span>
+      Eyes Matter.<br>
+      <span class="italic-word">Access</span>
+      <span class="outline-word"> Matters.</span>
     </h1>
 
-    <div class="hero-body">
-      <p class="hero-desc">
-        We are a <strong>youth-led initiative</strong> committed to making eye care accessible and affordable for everyone. Vision is a vital part of daily life — yet <strong>millions struggle</strong> to get the care they need.
-      </p>
-      <div class="hero-actions">
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTK_PN2sIn9YGsXqR97BFPVaWW6oPix-yyXlw8b3ifZ2gABw/viewform?usp=dialog" target="_blank" class="btn-mag btn-mag-fill">
-          <div class="btn-ripple"></div>
-          <span>Support Us</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
-        </a>
-        <a href="#about" class="btn-mag btn-mag-outline">
-          <span>Learn More</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-        </a>
+    <p class="hero-sub">
+      We are a <strong>youth-led initiative</strong> making eye care accessible and affordable for everyone. Vision is essential — yet <strong>1 billion people</strong> go without the care they need.
+    </p>
+
+    <div class="hero-btns">
+      <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTK_PN2sIn9YGsXqR97BFPVaWW6oPix-yyXlw8b3ifZ2gABw/viewform?usp=dialog" target="_blank" class="btn btn-teal">
+        ❤️ Support Our Mission
+        <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+      </a>
+      <a href="#mission" class="btn btn-ghost">
+        Learn More
+        <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
+      </a>
+    </div>
+
+    <div class="hero-stats">
+      <div class="hs-item">
+        <div class="hs-num" data-target="1" data-suffix="B+">1B+</div>
+        <div class="hs-label">Need vision care</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num" data-target="80" data-suffix="%">80%</div>
+        <div class="hs-label">Cases preventable</div>
+      </div>
+      <div class="hs-item">
+        <div class="hs-num" data-target="400" data-prefix="$" data-suffix="B">$400B</div>
+        <div class="hs-label">Economic loss annually</div>
       </div>
     </div>
   </div>
 
-  <div class="hero-scroll">
-    <div class="scroll-line"></div>
-    <span class="scroll-label">Scroll to explore</span>
-  </div>
-
-  <div class="hero-marquee">
-    <div class="marquee-inner" id="mq">
-      <span class="m-item">Eye Care for All <span class="m-sep"></span></span>
-      <span class="m-item">Youth-Led <span class="m-sep"></span></span>
-      <span class="m-item">1 Billion Affected <span class="m-sep"></span></span>
-      <span class="m-item">80% Preventable <span class="m-sep"></span></span>
-      <span class="m-item">Ottawa, Canada <span class="m-sep"></span></span>
-      <span class="m-item">Raise Awareness <span class="m-sep"></span></span>
-      <span class="m-item">Affordable Vision <span class="m-sep"></span></span>
-      <span class="m-item">Community Impact <span class="m-sep"></span></span>
-      <span class="m-item">Eye Care for All <span class="m-sep"></span></span>
-      <span class="m-item">Youth-Led <span class="m-sep"></span></span>
-      <span class="m-item">1 Billion Affected <span class="m-sep"></span></span>
-      <span class="m-item">80% Preventable <span class="m-sep"></span></span>
-      <span class="m-item">Ottawa, Canada <span class="m-sep"></span></span>
-      <span class="m-item">Raise Awareness <span class="m-sep"></span></span>
-      <span class="m-item">Affordable Vision <span class="m-sep"></span></span>
-      <span class="m-item">Community Impact <span class="m-sep"></span></span>
+  <div class="hero-ticker">
+    <div class="ticker-track" id="ticker">
+      <span class="t-item">Eye Care for All <span class="t-dot"></span></span>
+      <span class="t-item">Youth-Led <span class="t-dot"></span></span>
+      <span class="t-item">1 Billion Affected <span class="t-dot"></span></span>
+      <span class="t-item">80% Preventable <span class="t-dot"></span></span>
+      <span class="t-item">Ottawa · Canada <span class="t-dot"></span></span>
+      <span class="t-item">Raise Awareness <span class="t-dot"></span></span>
+      <span class="t-item">Affordable Vision <span class="t-dot"></span></span>
+      <span class="t-item">Community Impact <span class="t-dot"></span></span>
+      <span class="t-item">Eye Care for All <span class="t-dot"></span></span>
+      <span class="t-item">Youth-Led <span class="t-dot"></span></span>
+      <span class="t-item">1 Billion Affected <span class="t-dot"></span></span>
+      <span class="t-item">80% Preventable <span class="t-dot"></span></span>
+      <span class="t-item">Ottawa · Canada <span class="t-dot"></span></span>
+      <span class="t-item">Raise Awareness <span class="t-dot"></span></span>
+      <span class="t-item">Affordable Vision <span class="t-dot"></span></span>
+      <span class="t-item">Community Impact <span class="t-dot"></span></span>
     </div>
   </div>
 </section>
 
 <!-- ═══ IMPACT NUMBERS ═══ -->
 <section class="section impact" id="impact">
-  <div class="impact-grid rv-scale">
-    <div class="impact-cell">
-      <div class="ic-tag">Global Crisis</div>
-      <div class="ic-num" data-count="1" data-suffix="B+">1B+</div>
-      <div class="ic-text">People worldwide need vision correction but lack access to basic eye care.</div>
-      <div class="ic-icon">🌍</div>
+  <div class="rv" style="text-align:center;max-width:560px;margin:0 auto 60px">
+    <div class="tag" style="justify-content:center">The Scale</div>
+    <h2 class="display">A Crisis <em>Hidden</em> in Plain Sight</h2>
+  </div>
+  <div class="impact-cards rv-s">
+    <div class="imp-card">
+      <div class="imp-tag">Global Reach</div>
+      <div class="imp-num"><span data-target="1" data-suffix="B+">1B+</span></div>
+      <div class="imp-text">People worldwide need vision correction but lack access to even basic eye care services.</div>
+      <div class="imp-bg">🌍</div>
     </div>
-    <div class="impact-cell">
-      <div class="ic-tag">Preventable</div>
-      <div class="ic-num" data-count="80" data-suffix="%">80%</div>
-      <div class="ic-text">Of all vision problems are preventable or treatable with access to proper care.</div>
-      <div class="ic-icon">💡</div>
+    <div class="imp-card">
+      <div class="imp-tag">Preventable</div>
+      <div class="imp-num"><span data-target="80" data-suffix="%">80%</span></div>
+      <div class="imp-text">Of all vision problems worldwide are preventable or treatable with the right access to care.</div>
+      <div class="imp-bg">💡</div>
     </div>
-    <div class="impact-cell">
-      <div class="ic-tag">Economic Loss</div>
-      <div class="ic-num" data-count="400" data-prefix="$" data-suffix="B">$400B</div>
-      <div class="ic-text">Annual global productivity loss attributed to unaddressed vision impairment.</div>
-      <div class="ic-icon">📊</div>
+    <div class="imp-card">
+      <div class="imp-tag">Economic Loss</div>
+      <div class="imp-num"><span data-target="400" data-prefix="$" data-suffix="B">$400B</span></div>
+      <div class="imp-text">Annual productivity loss globally due to unaddressed vision impairment affecting livelihoods.</div>
+      <div class="imp-bg">📊</div>
     </div>
   </div>
 </section>
 
 <!-- ═══ MISSION ═══ -->
-<section class="section mission" id="about">
+<section class="section mission" id="mission">
   <div class="mission-layout">
     <div class="mission-left rv-l">
-      <div class="overline">Our Mission & Vision</div>
-      <h2 class="display-heading">Founded by Youth.<br><em>For Everyone.</em></h2>
-      <p>Vision for Change is run by passionate young people who believe clear sight shouldn't depend on your zip code or bank balance. We envision a world where vision correction is a right — and we're taking the first steps to make that reality.</p>
+      <div class="tag">Our Mission</div>
+      <h2 class="display">Founded by Youth,<br><em>For Everyone.</em></h2>
+      <p>Vision for Change is run by passionate young people who believe clear sight shouldn't depend on where you were born or how much you earn. We're taking the first steps to make that a reality.</p>
       <div class="pillars">
         <div class="pillar">
-          <span class="pillar-num">01</span>
-          <div class="pillar-dot">📚</div>
-          <div class="pillar-content">
+          <span class="p-num">01</span>
+          <div class="p-icon">📚</div>
+          <div class="p-content">
             <strong>Educate Communities</strong>
             <span>Spreading awareness about eye health, prevention, and the power of early detection.</span>
           </div>
         </div>
         <div class="pillar">
-          <span class="pillar-num">02</span>
-          <div class="pillar-dot">🚧</div>
-          <div class="pillar-content">
+          <span class="p-num">02</span>
+          <div class="p-icon">🚧</div>
+          <div class="p-content">
             <strong>Remove Barriers</strong>
-            <span>Connecting people with cost information and resources to reduce access gaps.</span>
+            <span>Connecting people with resources and reducing obstacles to affordable eye care.</span>
           </div>
         </div>
         <div class="pillar">
-          <span class="pillar-num">03</span>
-          <div class="pillar-dot">🌍</div>
-          <div class="pillar-content">
+          <span class="p-num">03</span>
+          <div class="p-icon">🌍</div>
+          <div class="p-content">
             <strong>Inspire Action</strong>
             <span>Advocacy, campaigns, and fundraising for low-cost exams and glasses.</span>
           </div>
@@ -927,74 +951,81 @@ footer {
     </div>
 
     <div class="mission-right rv-r">
-      <div class="eye-system">
-        <div class="orbit" style="width:380px;height:380px;border-color:rgba(0,229,204,.07);animation-duration:40s;">
-          <div class="orbit-dot" style="width:6px;height:6px;background:var(--cyan);opacity:.6;"></div>
+      <div class="eye-world">
+        <div class="ew-bg-circle"></div>
+
+        <!-- Orbital rings -->
+        <div class="ew-ring" style="width:340px;height:340px;border-color:rgba(14,165,176,.12);animation-duration:38s;">
+          <div class="ew-orbit-dot" style="width:8px;height:8px;background:var(--teal);color:var(--teal);"></div>
         </div>
-        <div class="orbit" style="width:290px;height:290px;border-color:rgba(61,111,255,.1);animation-duration:28s;animation-direction:reverse;">
-          <div class="orbit-dot" style="width:5px;height:5px;background:var(--blue);opacity:.7;"></div>
+        <div class="ew-ring" style="width:260px;height:260px;border-color:rgba(74,158,255,.15);animation-duration:26s;animation-direction:reverse;">
+          <div class="ew-orbit-dot" style="width:6px;height:6px;background:var(--sky);color:var(--sky);"></div>
         </div>
-        <div class="orbit" style="width:210px;height:210px;border-color:rgba(155,93,229,.12);animation-duration:18s;">
-          <div class="orbit-dot" style="width:8px;height:8px;background:#9B5DE5;opacity:.8;box-shadow:0 0 8px #9B5DE5;border-radius:50%;"></div>
+        <div class="ew-ring" style="width:190px;height:190px;border-color:rgba(255,107,74,.12);animation-duration:18s;">
+          <div class="ew-orbit-dot" style="width:7px;height:7px;background:var(--coral);color:var(--coral);"></div>
         </div>
-        <div class="eye-core">
-          <div class="eye-iris">
-            <div class="eye-pupil"></div>
+
+        <!-- Eye -->
+        <div class="ew-eye">
+          <div class="ew-eye-bg">
+            <div class="ew-iris">
+              <div class="ew-pupil"></div>
+            </div>
           </div>
         </div>
-        <div class="eye-stat" style="top:6%;left:5%;">
-          <div class="es-n">100%</div>
-          <div class="es-l">Youth-Led</div>
+
+        <!-- Floating chips -->
+        <div class="ew-chip" style="top:5%;left:8%;animation-duration:4s;animation-delay:0s">
+          <div class="chip-dot" style="background:var(--teal)"></div>
+          <span class="chip-label">Youth-Led</span>
         </div>
-        <div class="eye-stat" style="bottom:8%;right:2%;">
-          <div class="es-n">Free</div>
-          <div class="es-l">Resources</div>
+        <div class="ew-chip" style="bottom:10%;right:4%;animation-duration:5s;animation-delay:1.5s">
+          <div class="chip-dot" style="background:var(--sky)"></div>
+          <span class="chip-label">100% Free Resources</span>
         </div>
-        <div class="eye-stat" style="top:42%;right:-5%;">
-          <div class="es-n">2026</div>
-          <div class="es-l">Founded</div>
+        <div class="ew-chip" style="top:42%;right:-4%;animation-duration:3.5s;animation-delay:.8s">
+          <div class="chip-dot" style="background:var(--coral)"></div>
+          <span class="chip-label">Est. 2026</span>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ PROBLEM / WHY ═══ -->
-<section class="section problem" id="resources">
-  <div class="rv" style="max-width:640px">
-    <div class="overline">The Problem</div>
-    <h2 class="display-heading">Why Eye Access <em>Can't Wait</em></h2>
+<!-- ═══ PROBLEM ═══ -->
+<section class="section problem" id="problem">
+  <div class="rv" style="max-width:580px">
+    <div class="tag">Why It Matters</div>
+    <h2 class="display">The Problem <em>Can't Wait</em></h2>
   </div>
   <div class="bento">
-    <div class="bento-card bc-1 rv" style="transition-delay:.05s">
-      <span class="bc-accent bc-accent-cyan">Education</span>
+    <div class="bc bc-1 rv" style="transition-delay:.04s">
+      <div class="bc-chip chip-teal">Education</div>
       <div class="bc-title">Vision Problems Silently Derail Learning</div>
-      <div class="bc-body" style="max-width:420px">Children with uncorrected vision struggle in school — millions of learning disabilities worldwide are actually misdiagnosed vision problems. Clear sight is foundational to education.</div>
+      <div class="bc-body" style="max-width:460px">Millions of children with uncorrected vision struggle in school — many are misdiagnosed with learning disabilities when the real issue is simply they can't see the board clearly. Clear sight is the foundation of education.</div>
       <div class="bc-bg-icon">🎒</div>
     </div>
-    <div class="bento-card bc-2 rv" style="transition-delay:.1s">
-      <span class="bc-accent bc-accent-gold">Economy</span>
-      <div class="bc-big-num">$400B</div>
-      <div class="bc-body">Annual global productivity loss from unaddressed vision impairment — robbing people of livelihoods.</div>
+    <div class="bc bc-2 rv" style="transition-delay:.08s">
+      <div class="bc-chip chip-coral">Economy</div>
+      <div class="bc-big coral">$400B</div>
+      <div class="bc-body" style="margin-top:10px">Annual global productivity lost to unaddressed vision impairment — jobs, opportunities, and livelihoods.</div>
     </div>
-    <div class="bento-card bc-3 rv" style="transition-delay:.05s">
-      <span class="bc-accent bc-accent-blue">Access</span>
-      <div class="bc-num">100K</div>
-      <div class="bc-title">People per optometrist</div>
-      <div class="bc-body">In low-income regions, eye care professionals are desperately scarce.</div>
+    <div class="bc bc-3 rv" style="transition-delay:.04s">
+      <div class="bc-chip chip-sky">Access</div>
+      <div class="bc-big" style="color:var(--sky)">1:100K</div>
+      <div class="bc-title" style="font-size:16px;margin-top:10px">Optometrist ratio</div>
+      <div class="bc-body">In low-income regions one eye care professional serves over 100,000 people.</div>
       <div class="bc-bg-icon">🏥</div>
     </div>
-    <div class="bento-card bc-4 rv" style="transition-delay:.1s">
-      <span class="bc-accent bc-accent-cyan">Prevention</span>
-      <div class="bc-num">80%</div>
-      <div class="bc-title">Cases preventable</div>
-      <div class="bc-body">The majority of blindness is avoidable with proper care and early intervention.</div>
-      <div class="bc-bg-icon">💊</div>
+    <div class="bc bc-4 rv" style="transition-delay:.08s">
+      <div class="bc-chip chip-amber">Prevention</div>
+      <div class="bc-big" style="color:var(--amber)">80%</div>
+      <div class="bc-body" style="margin-top:10px">Of all blindness and vision loss is avoidable with proper care and early action.</div>
     </div>
-    <div class="bento-card bc-5 rv" style="transition-delay:.15s">
-      <span class="bc-accent bc-accent-blue">Quality of Life</span>
+    <div class="bc bc-5 rv" style="transition-delay:.12s">
+      <div class="bc-chip chip-teal">Quality of Life</div>
       <div class="bc-title">Beyond Sight</div>
-      <div class="bc-body">Vision loss affects mental health, independence, social connection, and safety — every dimension of human life.</div>
+      <div class="bc-body">Vision loss affects mental health, independence, social connection, safety, and every dimension of human life — far beyond just seeing clearly.</div>
       <div class="bc-bg-icon">✨</div>
     </div>
   </div>
@@ -1002,111 +1033,109 @@ footer {
 
 <!-- ═══ EYE HEALTH TIPS ═══ -->
 <section class="section tips" id="tips">
-  <div style="display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:20px" class="rv">
+  <div class="tips-header rv">
     <div>
-      <div class="overline">Protect Your Vision</div>
-      <h2 class="display-heading">Simple Habits. <em>Lasting Sight.</em></h2>
+      <div class="tag">Eye Health</div>
+      <h2 class="display">Simple Habits.<br><em>Lasting Sight.</em></h2>
     </div>
-    <a href="https://www.who.int/health-topics/blindness-and-vision-loss#tab=tab_1" target="_blank" class="btn-mag btn-mag-outline" style="margin-bottom:8px">
-      <span>WHO Resources</span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+    <a href="https://www.who.int/health-topics/blindness-and-vision-loss#tab=tab_1" target="_blank" class="btn btn-ghost">
+      WHO Resources
+      <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
     </a>
   </div>
-  <div class="tips-list">
+  <div class="tip-rows">
     <div class="tip-row rv" style="transition-delay:.04s">
-      <div class="tip-index">01</div>
-      <div class="tip-main">
-        <div class="tip-icon-box">🖥️</div>
-        <div class="tip-name">Screen Breaks</div>
+      <div class="tr-index">01</div>
+      <div class="tr-main">
+        <div class="tr-icon">🖥️</div>
+        <div class="tr-name">Screen Breaks</div>
       </div>
-      <div class="tip-detail">
-        <p>The 20-20-20 rule: every 20 minutes, look at something 20 feet away for 20 seconds. It drastically reduces digital eye strain.</p>
-        <div class="tip-arrow">↗</div>
+      <div class="tr-detail">
+        <p>The 20-20-20 rule: every 20 minutes, look at something 20 feet away for 20 seconds. It dramatically reduces digital eye strain and fatigue.</p>
+        <div class="tr-arrow">↗</div>
       </div>
     </div>
     <div class="tip-row rv" style="transition-delay:.08s">
-      <div class="tip-index">02</div>
-      <div class="tip-main">
-        <div class="tip-icon-box">🥕</div>
-        <div class="tip-name">Nutrition</div>
+      <div class="tr-index">02</div>
+      <div class="tr-main">
+        <div class="tr-icon">🥕</div>
+        <div class="tr-name">Nutrition</div>
       </div>
-      <div class="tip-detail">
-        <p>Vitamins A, C, E, zinc, and omega-3s protect against macular degeneration and cataracts. Eat leafy greens and colorful vegetables.</p>
-        <div class="tip-arrow">↗</div>
+      <div class="tr-detail">
+        <p>Vitamins A, C, E, zinc, and omega-3s protect against macular degeneration and cataracts. Eat leafy greens, fish, and colourful vegetables.</p>
+        <div class="tr-arrow">↗</div>
       </div>
     </div>
     <div class="tip-row rv" style="transition-delay:.12s">
-      <div class="tip-index">03</div>
-      <div class="tip-main">
-        <div class="tip-icon-box">👁️</div>
-        <div class="tip-name">Regular Checkups</div>
+      <div class="tr-index">03</div>
+      <div class="tr-main">
+        <div class="tr-icon">👁️</div>
+        <div class="tr-name">Regular Checkups</div>
       </div>
-      <div class="tip-detail">
-        <p>Many serious conditions like glaucoma have no symptoms until significant damage occurs. Annual exams catch problems early, when they're most treatable.</p>
-        <div class="tip-arrow">↗</div>
+      <div class="tr-detail">
+        <p>Conditions like glaucoma have no symptoms until significant damage occurs. Annual exams catch problems early when they're most treatable.</p>
+        <div class="tr-arrow">↗</div>
       </div>
     </div>
     <div class="tip-row rv" style="transition-delay:.16s">
-      <div class="tip-index">04</div>
-      <div class="tip-main">
-        <div class="tip-icon-box">🕶️</div>
-        <div class="tip-name">Sun Protection</div>
+      <div class="tr-index">04</div>
+      <div class="tr-main">
+        <div class="tr-icon">🕶️</div>
+        <div class="tr-name">Sun Protection</div>
       </div>
-      <div class="tip-detail">
-        <p>UV exposure accumulates over a lifetime. Wear sunglasses blocking 100% UVA/UVB rays to prevent cataracts and macular degeneration.</p>
-        <div class="tip-arrow">↗</div>
+      <div class="tr-detail">
+        <p>UV exposure accumulates over a lifetime. Wear sunglasses with 100% UVA/UVB protection outdoors to prevent cataracts and long-term damage.</p>
+        <div class="tr-arrow">↗</div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- ═══ DONATE / JOIN ═══ -->
-<section class="section donate-section" id="donate">
+<!-- ═══ DONATE ═══ -->
+<section class="section donate" id="donate">
   <div class="donate-layout">
     <div class="donate-left rv-l">
-      <div class="overline">Join the Movement</div>
-      <h2 class="display-heading">Every Action <em>Counts</em></h2>
-      <p>We're just getting started — and your involvement right now shapes what we can build. Help us reach more people with the gift of clear vision.</p>
-      <div class="give-ways">
-        <div class="gw">
-          <div class="gw-icon" style="background:rgba(0,229,204,.08);border:1px solid rgba(0,229,204,.15)">💰</div>
-          <div class="gw-text">
+      <div class="tag">Join the Movement</div>
+      <h2 class="display">Every Action <em>Counts</em></h2>
+      <p>We're just getting started — and your involvement shapes what we can build. Help us give more people the gift of clear vision.</p>
+      <div class="give-list">
+        <div class="give-item">
+          <div class="give-icon">💰</div>
+          <div class="give-text">
             <strong>Donate</strong>
-            <span>Fund awareness campaigns, educational materials, and low-cost eye exams for those in need.</span>
+            <span>Fund awareness campaigns, educational materials, and low-cost eye exams for those who need them most.</span>
           </div>
         </div>
-        <div class="gw">
-          <div class="gw-icon" style="background:rgba(61,111,255,.08);border:1px solid rgba(61,111,255,.15)">📣</div>
-          <div class="gw-text">
+        <div class="give-item">
+          <div class="give-icon" style="background:var(--sky-lt);border-color:rgba(74,158,255,.25)">📣</div>
+          <div class="give-text">
             <strong>Spread the Word</strong>
             <span>Share our resources on social media and help more people understand the importance of eye health.</span>
           </div>
         </div>
-        <div class="gw">
-          <div class="gw-icon" style="background:rgba(155,93,229,.08);border:1px solid rgba(155,93,229,.15)">🤝</div>
-          <div class="gw-text">
+        <div class="give-item">
+          <div class="give-icon" style="background:var(--coral-lt);border-color:rgba(255,107,74,.2)">🤝</div>
+          <div class="give-text">
             <strong>Volunteer</strong>
-            <span>We're looking for passionate youth to join our team. Reach out — every skill matters.</span>
+            <span>We're always looking for passionate youth. Reach out — every skill matters and everyone is welcome.</span>
           </div>
         </div>
       </div>
     </div>
     <div class="rv-r">
       <div class="donate-card">
-        <div class="donate-card-badge">
-          <span>❤️</span> Make a Difference Today
-        </div>
-        <div class="dc-title">Support Vision for Change</div>
-        <div class="dc-body">Every dollar goes directly toward spreading awareness and funding low-cost eye exams and glasses for those who need them most.</div>
-        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTK_PN2sIn9YGsXqR97BFPVaWW6oPix-yyXlw8b3ifZ2gABw/viewform?usp=dialog" target="_blank" class="big-donate-btn">
-          <span>Donate Now</span>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
+        <div class="dc-badge">❤️ Make a Difference</div>
+        <div class="dc-title">Support <em>Vision for Change</em></div>
+        <div class="dc-body">Every dollar goes directly toward spreading awareness and funding low-cost eye exams and glasses for people who can't afford them.</div>
+        <a href="https://docs.google.com/forms/d/e/1FAIpQLSeTK_PN2sIn9YGsXqR97BFPVaWW6oPix-yyXlw8b3ifZ2gABw/viewform?usp=dialog" target="_blank" class="big-btn">
+          Donate Now
+          <svg viewBox="0 0 24 24"><path d="M7 17L17 7M17 7H7M17 7v10"/></svg>
         </a>
-        <div class="dc-fine">Secure · 100% goes to our mission</div>
+        <div class="dc-note">Secure · 100% goes to our mission</div>
         <div class="dc-trust">
-          <div class="trust-item"><span>✅</span> Youth-Led</div>
-          <div class="trust-item"><span>🌍</span> Community Impact</div>
-          <div class="trust-item"><span>🔒</span> Secure</div>
+          <div class="trust-pill"><span>✅</span> Youth-Led</div>
+          <div class="trust-pill"><span>🌍</span> Community</div>
+          <div class="trust-pill"><span>🔒</span> Secure</div>
         </div>
       </div>
     </div>
@@ -1114,45 +1143,45 @@ footer {
 </section>
 
 <!-- ═══ CONTACT ═══ -->
-<section class="section contact-section" id="contact">
-  <div class="rv" style="max-width:540px">
-    <div class="overline">Get in Touch</div>
-    <h2 class="display-heading">We Want to <em>Hear From You</em></h2>
+<section class="section contact" id="contact">
+  <div class="rv" style="max-width:480px">
+    <div class="tag">Get in Touch</div>
+    <h2 class="display">We'd Love to <em>Hear From You</em></h2>
   </div>
-  <div class="contact-grid">
+  <div class="contact-inner-grid">
     <div class="contact-left rv-l">
-      <p>Whether you want to donate, volunteer, partner with us, or simply learn more — we'd love to connect. We're a small youth-led team and we respond personally.</p>
-      <div class="contact-cards">
-        <a href="mailto:visionforchange18@gmail.com" class="cc">
-          <div class="cc-icon-wrap">✉️</div>
-          <div class="cc-meta">
-            <div class="cc-type">Email</div>
-            <div class="cc-val">visionforchange18@gmail.com</div>
+      <p>Whether you want to donate, volunteer, partner with us, or learn more about eye health — we're a small, friendly youth team and we respond personally to everyone.</p>
+      <div class="contact-items">
+        <a href="mailto:visionforchange18@gmail.com" class="ci">
+          <div class="ci-ico">✉️</div>
+          <div>
+            <div class="ci-type">Email</div>
+            <div class="ci-val">visionforchange18@gmail.com</div>
           </div>
         </a>
-        <a href="https://www.instagram.com/visionforchange2026/" target="_blank" class="cc">
-          <div class="cc-icon-wrap">📷</div>
-          <div class="cc-meta">
-            <div class="cc-type">Instagram</div>
-            <div class="cc-val">@visionforchange2026</div>
+        <a href="https://www.instagram.com/visionforchange2026/" target="_blank" class="ci">
+          <div class="ci-ico">📷</div>
+          <div>
+            <div class="ci-type">Instagram</div>
+            <div class="ci-val">@visionforchange2026</div>
           </div>
         </a>
-        <a href="tel:+16132828851" class="cc">
-          <div class="cc-icon-wrap">📞</div>
-          <div class="cc-meta">
-            <div class="cc-type">Phone</div>
-            <div class="cc-val">+1 613 282 8851</div>
+        <a href="tel:+16132828851" class="ci">
+          <div class="ci-ico">📞</div>
+          <div>
+            <div class="ci-type">Phone</div>
+            <div class="ci-val">+1 613 282 8851</div>
           </div>
         </a>
       </div>
     </div>
     <div class="contact-right rv-r">
-      <div class="social-heading">Follow Our Journey</div>
-      <div class="social-sub">Stay updated as we grow our impact.</div>
-      <div class="socials">
-        <a href="https://www.instagram.com/visionforchange2026/" target="_blank" class="soc">
+      <div class="cr-title">Follow Our Journey</div>
+      <div class="cr-sub">Stay updated as we grow our impact in the community.</div>
+      <div class="soc-list">
+        <a href="https://www.instagram.com/visionforchange2026/" target="_blank" class="soc-item">
           <div class="soc-left">
-            <span class="soc-ico">📷</span>
+            <span class="soc-icon">📷</span>
             <div>
               <div class="soc-platform">Instagram</div>
               <div class="soc-handle">@visionforchange2026</div>
@@ -1160,9 +1189,9 @@ footer {
           </div>
           <span class="soc-arr">↗</span>
         </a>
-        <a href="mailto:visionforchange18@gmail.com" class="soc">
+        <a href="mailto:visionforchange18@gmail.com" class="soc-item">
           <div class="soc-left">
-            <span class="soc-ico">✉️</span>
+            <span class="soc-icon">✉️</span>
             <div>
               <div class="soc-platform">Email Us</div>
               <div class="soc-handle">visionforchange18@gmail.com</div>
@@ -1170,9 +1199,9 @@ footer {
           </div>
           <span class="soc-arr">↗</span>
         </a>
-        <a href="tel:+16132828851" class="soc">
+        <a href="tel:+16132828851" class="soc-item">
           <div class="soc-left">
-            <span class="soc-ico">📞</span>
+            <span class="soc-icon">📞</span>
             <div>
               <div class="soc-platform">Call Us</div>
               <div class="soc-handle">+1 613 282 8851</div>
@@ -1187,224 +1216,75 @@ footer {
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-inner">
-    <a href="#home" class="footer-brand">
-      <svg class="logo-mark" viewBox="0 0 30 30" fill="none">
-        <circle cx="15" cy="15" r="14" stroke="#00E5CC" stroke-width="1"/>
-        <ellipse cx="15" cy="15" rx="9" ry="5.5" stroke="rgba(0,229,204,.4)" stroke-width="1"/>
-        <circle cx="15" cy="15" r="4" fill="#00E5CC" opacity=".9"/>
-      </svg>
-      <span class="footer-brand-name">Vision<span>for</span>Change</span>
+  <div class="foot-top">
+    <a href="#home" class="foot-logo">
+      <div class="foot-logo-eye"></div>
+      <div>
+        <div class="foot-brand">Vision for <span>Change</span></div>
+        <div class="foot-tagline">Making eye care accessible for all</div>
+      </div>
     </a>
-    <div class="footer-copy">
-      © 2026 Vision for Change · All Rights Reserved · Made with ❤️ by Youth, for Everyone
+    <div class="foot-nav-links">
+      <a href="#home">Home</a>
+      <a href="#mission">Mission</a>
+      <a href="#problem">Impact</a>
+      <a href="#tips">Eye Health</a>
+      <a href="#donate">Donate</a>
+      <a href="#contact">Contact</a>
     </div>
-    <div class="footer-links">
-      <a href="mailto:visionforchange18@gmail.com">Email</a>
-      <a href="https://www.instagram.com/visionforchange2026/" target="_blank">Instagram</a>
-      <a href="https://www.who.int/health-topics/blindness-and-vision-loss" target="_blank">WHO</a>
-    </div>
+  </div>
+  <div class="foot-bottom">
+    <div class="foot-copy">© 2026 Vision for Change · All Rights Reserved</div>
+    <div class="foot-made">Made with ❤️ by Youth, for Everyone</div>
   </div>
 </footer>
 
 <script>
-/* ══════════════════════════
-   CANVAS PARTICLE SYSTEM
-══════════════════════════ */
-const canvas = document.getElementById('bg-canvas');
-const ctx = canvas.getContext('2d');
-let W, H, particles = [], mouse = {x:-999,y:-999};
-
-function resize() {
-  W = canvas.width = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-}
-resize();
-window.addEventListener('resize', resize);
-
-class Particle {
-  constructor() { this.reset(true); }
-  reset(init) {
-    this.x = Math.random() * W;
-    this.y = init ? Math.random() * H : H + 10;
-    this.vx = (Math.random() - 0.5) * 0.3;
-    this.vy = -Math.random() * 0.4 - 0.1;
-    this.r = Math.random() * 1.5 + 0.3;
-    this.alpha = Math.random() * 0.4 + 0.05;
-    const c = Math.random();
-    if (c < 0.5) this.color = '0,229,204';
-    else if (c < 0.8) this.color = '61,111,255';
-    else this.color = '155,93,229';
-    this.life = 1;
-    this.decay = Math.random() * 0.001 + 0.0005;
-  }
-  update() {
-    const dx = this.x - mouse.x, dy = this.y - mouse.y;
-    const dist = Math.sqrt(dx*dx + dy*dy);
-    if (dist < 120) {
-      this.vx += dx / dist * 0.04;
-      this.vy += dy / dist * 0.04;
-    }
-    this.vx *= 0.99; this.vy *= 0.99;
-    this.x += this.vx; this.y += this.vy;
-    this.life -= this.decay;
-    if (this.life <= 0 || this.y < -10) this.reset(false);
-  }
-  draw() {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.r, 0, Math.PI*2);
-    ctx.fillStyle = `rgba(${this.color},${this.alpha * this.life})`;
-    ctx.fill();
-  }
-}
-
-for (let i = 0; i < 120; i++) particles.push(new Particle());
-
-function animCanvas() {
-  ctx.clearRect(0, 0, W, H);
-  // Draw faint connection lines
-  for (let i = 0; i < particles.length; i++) {
-    for (let j = i+1; j < particles.length; j++) {
-      const dx = particles[i].x - particles[j].x;
-      const dy = particles[i].y - particles[j].y;
-      const d = Math.sqrt(dx*dx+dy*dy);
-      if (d < 90) {
-        ctx.beginPath();
-        ctx.moveTo(particles[i].x, particles[i].y);
-        ctx.lineTo(particles[j].x, particles[j].y);
-        ctx.strokeStyle = `rgba(0,229,204,${(1-d/90)*0.06})`;
-        ctx.lineWidth = 0.5;
-        ctx.stroke();
-      }
-    }
-    particles[i].update();
-    particles[i].draw();
-  }
-  requestAnimationFrame(animCanvas);
-}
-animCanvas();
-
-document.addEventListener('mousemove', e => { mouse.x = e.clientX; mouse.y = e.clientY; });
-
-/* ══════════════════════════
-   CUSTOM CURSOR
-══════════════════════════ */
+/* ── CURSOR ── */
 const dot = document.getElementById('c-dot');
 const ring = document.getElementById('c-ring');
-let cx = 0, cy = 0, rx2 = 0, ry2 = 0;
-
-document.addEventListener('mousemove', e => { cx = e.clientX; cy = e.clientY; });
-
-function animCursor() {
-  dot.style.left = cx + 'px'; dot.style.top = cy + 'px';
-  rx2 += (cx - rx2) * 0.1; ry2 += (cy - ry2) * 0.1;
-  ring.style.left = rx2 + 'px'; ring.style.top = ry2 + 'px';
-  requestAnimationFrame(animCursor);
-}
-animCursor();
-
-document.querySelectorAll('a,button,.bento-card,.pillar,.tip-row,.gw,.cc,.soc,.impact-cell').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{ mx=e.clientX; my=e.clientY; dot.style.left=mx+'px'; dot.style.top=my+'px'; });
+(function loop(){ rx+=(mx-rx)*.1; ry+=(my-ry)*.1; ring.style.left=rx+'px'; ring.style.top=ry+'px'; requestAnimationFrame(loop); })();
+document.querySelectorAll('a,button,.imp-card,.bc,.pillar,.tip-row,.give-item,.ci,.soc-item,.donate-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>dot.classList.add('hov'));
+  el.addEventListener('mouseleave',()=>dot.classList.remove('hov'));
 });
 
-/* ══════════════════════════
-   NAV
-══════════════════════════ */
-const nav = document.getElementById('nav');
-window.addEventListener('scroll', () => {
-  nav.classList.toggle('stuck', window.scrollY > 40);
-  const pct = (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100;
-  document.getElementById('progress-bar').style.width = pct + '%';
+/* ── NAV ── */
+const nav=document.getElementById('mainnav');
+window.addEventListener('scroll',()=>{
+  nav.classList.toggle('stuck',scrollY>50);
+  document.getElementById('pgbar').style.width=(scrollY/(document.documentElement.scrollHeight-innerHeight)*100)+'%';
 });
+function toggleMenu(){ const m=document.getElementById('nmob'); const h=document.getElementById('nham'); m.classList.toggle('open'); h.classList.toggle('open'); document.body.style.overflow=m.classList.contains('open')?'hidden':''; }
+function closeMenu(){ document.getElementById('nmob').classList.remove('open'); document.getElementById('nham').classList.remove('open'); document.body.style.overflow=''; }
 
-function toggleMenu() {
-  const ham = document.getElementById('nham');
-  const mob = document.getElementById('nmobile');
-  ham.classList.toggle('open');
-  mob.classList.toggle('open');
-  document.body.style.overflow = mob.classList.contains('open') ? 'hidden' : '';
-}
-function closeMenu() {
-  document.getElementById('nham').classList.remove('open');
-  document.getElementById('nmobile').classList.remove('open');
-  document.body.style.overflow = '';
-}
+/* ── SMOOTH ANCHORS ── */
+document.querySelectorAll('a[href^="#"]').forEach(a=>{ a.addEventListener('click',e=>{ const t=document.getElementById(a.getAttribute('href').slice(1)); if(t){ e.preventDefault(); t.scrollIntoView({behavior:'smooth',block:'start'}); }}); });
 
-/* ══════════════════════════
-   SCROLL REVEAL
-══════════════════════════ */
-const revealEls = document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-scale');
-const rObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); } });
-}, { threshold: 0.1, rootMargin:'0px 0px -40px 0px' });
-revealEls.forEach(el => rObs.observe(el));
+/* ── SCROLL REVEAL ── */
+const rvEls=document.querySelectorAll('.rv,.rv-l,.rv-r,.rv-s');
+new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:.1,rootMargin:'0px 0px -40px 0px'}).observe ? 
+  rvEls.forEach(el=>new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:.1,rootMargin:'0px 0px -40px 0px'}).observe(el)) : null;
 
-/* ══════════════════════════
-   COUNTER ANIMATION
-══════════════════════════ */
-function easeOut(t) { return 1 - Math.pow(1-t, 4); }
-function runCounter(el) {
-  const target = parseFloat(el.dataset.count);
-  const suffix = el.dataset.suffix || '';
-  const prefix = el.dataset.prefix || '';
-  const dur = 2200;
-  let start = null;
-  function step(ts) {
-    if (!start) start = ts;
-    const p = Math.min((ts-start)/dur, 1);
-    const val = target * easeOut(p);
-    el.textContent = prefix + (Number.isInteger(target) ? Math.floor(val) : val.toFixed(1)) + suffix;
-    if (p < 1) requestAnimationFrame(step);
-  }
+// single observer for all
+const obs = new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('in'); }),{threshold:.1,rootMargin:'0px 0px -40px 0px'});
+rvEls.forEach(el=>obs.observe(el));
+
+/* ── COUNTERS ── */
+function easeOut(t){ return 1-Math.pow(1-t,4); }
+function runCount(el){
+  const target=parseFloat(el.dataset.target||el.textContent);
+  const suffix=el.dataset.suffix||'';
+  const prefix=el.dataset.prefix||'';
+  if(!target) return;
+  const dur=2000; let start=null;
+  function step(ts){ if(!start)start=ts; const p=Math.min((ts-start)/dur,1); const v=target*easeOut(p); el.textContent=prefix+(Number.isInteger(target)?Math.floor(v):v.toFixed(1))+suffix; if(p<1)requestAnimationFrame(step); }
   requestAnimationFrame(step);
 }
-const cntObs = new IntersectionObserver(entries => {
-  entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); cntObs.unobserve(e.target); } });
-}, { threshold: 0.5 });
-document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el));
-
-/* ══════════════════════════
-   BENTO CARD MOUSE GLOW
-══════════════════════════ */
-document.querySelectorAll('.bento-card').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    const x = ((e.clientX - r.left) / r.width * 100).toFixed(1);
-    const y = ((e.clientY - r.top) / r.height * 100).toFixed(1);
-    card.style.setProperty('--mx', x + '%');
-    card.style.setProperty('--my', y + '%');
-  });
-});
-
-/* ══════════════════════════
-   MAGNETIC BUTTONS
-══════════════════════════ */
-document.querySelectorAll('.btn-mag').forEach(btn => {
-  btn.addEventListener('mousemove', e => {
-    const r = btn.getBoundingClientRect();
-    const dx = e.clientX - r.left - r.width/2;
-    const dy = e.clientY - r.top - r.height/2;
-    btn.style.transform = `translate(${dx*.18}px, ${dy*.18}px)`;
-  });
-  btn.addEventListener('mouseleave', () => {
-    btn.style.transform = '';
-  });
-});
-
-/* ══════════════════════════
-   SMOOTH ANCHOR SCROLL
-══════════════════════════ */
-document.querySelectorAll('a[href^="#"]').forEach(a => {
-  a.addEventListener('click', e => {
-    const id = a.getAttribute('href').slice(1);
-    const target = document.getElementById(id);
-    if (target) {
-      e.preventDefault();
-      target.scrollIntoView({ behavior:'smooth', block:'start' });
-    }
-  });
-});
+const cObs=new IntersectionObserver(entries=>entries.forEach(e=>{ if(e.isIntersecting){ runCount(e.target); cObs.unobserve(e.target); }}),{threshold:.5});
+document.querySelectorAll('[data-target]').forEach(el=>cObs.observe(el));
 </script>
 </body>
 </html>
